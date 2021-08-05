@@ -13,15 +13,9 @@ from .TemplateOptions import TemplateOptions
 DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename("curvenote_template", "builtin_template")
 
 class TemplateLoader:
-    _template_name: Optional[str]
-    _target_folder: str
-
     def __init__(self, target_folder: str):
-        self._template_name = None
-        self._renderer = None
-        self._options = None
-
-        self._target_folder = target_folder
+        self._template_name: Optional[str] = None
+        self._target_folder: str = target_folder
         os.makedirs(self._target_folder, exist_ok=True)
 
     @staticmethod

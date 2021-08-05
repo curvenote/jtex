@@ -1,4 +1,5 @@
 
+from curvenote_template.TexFormat import TexFormat
 import os
 import pkg_resources
 import logging
@@ -20,7 +21,7 @@ class TemplateOptions:
             logging.info("%s does not exist", template_yml)
             raise FileNotFoundError(f"{template_yml} does not exist")
 
-        self._parser = Core(
+        self._parser: Core = Core(
             source_file=template_yml,
             schema_files=[
                 os.path.join(SCHEMA_PATH, "config.schema.yml"),
@@ -29,6 +30,16 @@ class TemplateOptions:
         )
         self._parser.validate(raise_exception=True)
 
+        # now that schemas are loaded, we can configure additional options
+        self._tex_format: TexFormat = (
+            TexFormat.tex
+            if self.get("config.build.vanilla")
+            else TexFormat.tex_curvenote
+        )
+
+    @property
+    def tex_format(self) -> TexFormat:
+        return self._tex_format
 
     @property
     def template_location(self):
