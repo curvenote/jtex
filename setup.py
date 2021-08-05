@@ -1,3 +1,4 @@
+import os
 import sys
 import setuptools
 
@@ -5,8 +6,10 @@ sys.path[0:0] = ['curvenote_template']
 from version import __version__
 
 def readme():
-    with open("README.rst") as file:
-        return file.read()
+    if os.path.exists("README.rst"):
+        with open("README.rst") as file:
+            return file.read()
+    return ""
 
 
 setuptools.setup(
