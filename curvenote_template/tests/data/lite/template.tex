@@ -1,0 +1,9 @@
+[# for author in doc.authors #]
+\author{[- author.name -]}
+[# endfor #]
+[# if tagged.abstract #]
+\begin{abstract}
+[-tagged.abstract-]
+\end{abstract}
+[# endif #]
+[-CONTENT-]

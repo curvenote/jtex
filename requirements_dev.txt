@@ -1,0 +1,9 @@
+-r requirements.txt
+black
+isort
+pylint
+pytest
+pytest-cov
+pytest-watch
+sphinx
+twine

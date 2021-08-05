@@ -1,0 +1,35 @@
+metadata:
+  title: Plain LaTeX (built-in)
+  description: A minimal template that renders Curvenote content
+  version: 1.0.0
+  license: CC-BY-SA
+  source: Curvenote
+  author:
+    name: Steve Purves
+    github: curvenote
+    twitter: curvenote
+    affiliation: Curvenote
+  tags:
+    - article
+    - paper
+    - vanilla
+  links:
+    github: https://github.com/curvenote/templates/tree/main/latex/basic
+    source: https://curvenote.com
+
+# options that can be offered to users to customise how this template is rendered
+config:
+  build:
+    layout: compact
+    vanilla: true
+
+  schema:
+    raggedbottom: true
+    sloppy: true
+    hidelinks: true
+
+  tagged:
+    abstract:
+      required: false
+
+  options: {}

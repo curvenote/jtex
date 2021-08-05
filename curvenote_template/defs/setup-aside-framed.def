@@ -1,0 +1,1 @@
+\newenvironment{aside}{\begin{framed}}{\end{framed}}

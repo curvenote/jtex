@@ -1,0 +1,1 @@
+\newenvironment{callout}{\begin{mdframed}}{\end{mdframed}}

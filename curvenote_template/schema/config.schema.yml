@@ -1,0 +1,68 @@
+schema;config:
+  map:
+    # fixed per template and cannotbe overridden from the UI
+    build:
+      map:
+        layout:
+          type: str
+          enum: ["compact", "book"]
+        vanilla:
+          type: bool
+
+    # fixed per template
+    schema:
+      map:
+        aside:
+          type: str
+          enum:
+            [
+              "default",
+              "marginpar",
+              "framed",
+              "mdframed",
+              "callout",
+              "aside.def",
+            ]
+        callout:
+          type: str
+          enum: ["default", "callout", "mdframed", "framed", "callout.def"]
+        code:
+          type: str
+          enum: ["default", "verbatim", "highlight", "code.def"]
+        raggedbottom:
+          type: bool
+        sloppy:
+          type: bool
+        hidelinks:
+          type: bool
+        natbib:
+          type: bool
+        bibstyle:
+          type: bool
+        citestyle:
+          type: bool
+
+    # fixed per template, but provided optionally by the user
+    # is tagged content is not provided tagged elements in the
+    # template will be omitted
+    tagged:
+      allowempty: true
+      map:
+        regex;([a-z]{1}[a-z0-9]{0,63}):
+          map:
+            required:
+              type: bool
+
+    # set per template but can be overridden by the user
+    options:
+      allowempty: true
+      map:
+        regex;([a-z]{1}[a-z0-9_]{0,63}):
+          map:
+            type: # note this is a key name
+              type: str
+              enum: ["bool", "str"]
+            default:
+              type: any
+            required:
+              type: bool

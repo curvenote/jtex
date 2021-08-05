@@ -1,0 +1,61 @@
+name: Curvenote Template Schema
+desc: 0.0.2
+map:
+  metadata:
+    allowempty: true
+    map:
+      title:
+        type: str
+        required: true
+      description:
+        type: str
+        required: true
+      version:
+        type: str
+        required: true
+      license:
+        type: text
+        required: true
+      author:
+        map:
+          name:
+            type: str
+            required: true
+          email:
+            type: str
+          github:
+            type: str
+          twitter:
+            type: str
+          affiliation:
+            type: str
+          website:
+            type: str
+      contributor:
+        map:
+          name:
+            type: str
+            required: true
+          email:
+            type: str
+          github:
+            type: str
+          twitter:
+            type: str
+          affiliation:
+            type: str
+          website:
+            type: str
+      tags:
+        seq:
+          - type: str
+            unique: true
+        required: true
+      links:
+        map:
+          github:
+            type: str
+          source:
+            type: str
+  config:
+    include: config

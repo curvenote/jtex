@@ -1,0 +1,34 @@
+\documentclass{article}
+\input{curvenote.def}
+
+% We've included a Curvenote logo linking back to your online article - modify as needed
+\newcommand{\logo}{
+  \href{[-doc.oxalink-]}{\includegraphics[width=2cm]{curvenote.png}}
+}
+
+\bibliographystyle{abbrvnat}
+\setcitestyle{authoryear,open={(},close={)},comma,aysep={,}}
+\graphicspath{{assets/}}
+
+\title{[-doc.title-]}
+
+\author{
+[# for author in doc.authors #]
+[-author.name-][# if not loop.last #] \and [# endif #]
+[# endfor #]
+}
+
+\newdate{articleDate}{[-doc.date.day-]}{[-doc.date.month-]}{[-doc.date.year-]}
+\date{\displaydate{articleDate}}
+
+\begin{document}
+\maketitle
+
+[# if tagged.abstract #]\begin{abstract}[-tagged.abstract-]\end{abstract}[# endif #]
+
+\begin{center}\logo\end{center}
+
+[-CONTENT-]
+
+\bibliography{main}
+\end{document}

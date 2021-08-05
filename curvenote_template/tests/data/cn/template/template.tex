@@ -1,0 +1,14 @@
+\title{[-doc.title-]}
+\author{[# for author in doc.authors #]
+[-author.name-][# if not loop.last #] \and [# endif #]
+[# endfor #]
+}
+\begin{document}
+\maketitle
+[# if tagged and tagged.abstract #]
+\begin{abstract}
+[-tagged.abstract-]
+\end{abstract}
+[# endif #]
+[-CONTENT-]
+\end{document}

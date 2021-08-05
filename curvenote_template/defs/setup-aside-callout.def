@@ -1,0 +1,2 @@
+\newmdenv[linewidth=2pt,linecolor=CornflowerBlue,topline=false,bottomline=false,rightline=false,leftline=true,skipabove=20,skipbelow=20,leftmargin=20,rightmargin=20]{aside_as_callout}
+\newenvironment{aside}{\begin{aside_as_callout}}{\end{aside_as_callout}}

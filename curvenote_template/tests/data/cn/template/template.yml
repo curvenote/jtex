@@ -1,0 +1,44 @@
+metadata:
+  title: Curvenote Default
+  description: A paper styled template using the custom environments and styling to match Curvenote Web
+  author:
+    name: Curvenote
+    github: curvenote
+    twitter: curvenote
+    affiliation: Curvenote
+  source: Curvenote
+  version: 0.2.0
+  license: CC-BY
+  tags:
+    - article
+    - paper
+  # links:
+  #   github: https://github.com/curvenote/templates/tree/main/latex/curvenote_paper
+  #   source: http://curvenote.com
+# options that can be offered to users to customise how this template is rendered
+config:
+  build:
+    layout: compact
+
+  schema:
+    aside: callout
+    callout: callout
+    code: highlight
+    raggedbottom: true
+    sloppy: true
+    hidelinks: true
+
+  tagged:
+    abstract:
+      required: false
+# options:
+#   watermark:
+#     type: bool
+#     default: true
+#     required: false
+#   corresponding_email:
+#     type: str
+#     required: true
+#   draft:
+#     type: bool
+#     required: false

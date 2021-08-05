@@ -1,0 +1,7 @@
+\usemintedstyle{friendly}
+\newenvironment{code}[1][python]{
+    \begin{minted}[tabsize=4, linenos, mathescape, numbersep=5pt, framesep=2mm]{#1}
+}{
+    \end{minted}
+}
+\surroundwithmdframed[linewidth=1pt,leftmargin=20,rightmargin=20,hidealllines=true, backgroundcolor=GhostWhite]{code}
