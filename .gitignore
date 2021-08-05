@@ -12,3 +12,4 @@ test_tmp/
 dist/
 env/
 pip-wheel-metadata/
+README.rst
