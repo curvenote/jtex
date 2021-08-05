@@ -61,7 +61,10 @@ schema;config:
           map:
             type: # note this is a key name
               type: str
-              enum: ["bool", "str", "choice"]
+              enum: ["bool", "str", "choice", "dict"]
+            properties:
+              seq:
+                - type: str
             options:
               seq:
                 - type: str
