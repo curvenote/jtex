@@ -11,7 +11,7 @@ def test_cli_build_lite():
         tmp_file = os.path.join(tmp_dir, next(tempfile._get_candidate_names()))
 
         CLI_CMD = (
-            f"python -m curvenote_template build-lite {tmp_file} "
+            f"curvenote_template build-lite {tmp_file} "
             f"{os.path.join(dir, 'data', 'lite', 'data.yml')} "
             f"{os.path.join(dir, 'data', 'lite', 'main.tex')} "
             f"{os.path.join(dir, 'data', 'lite', 'template.tex')} "

@@ -5,16 +5,16 @@ sys.path[0:0] = ['curvenote_template']
 from version import __version__
 
 def readme():
-    with open("README.md") as file:
+    with open("README.rst") as file:
         return file.read()
 
 
 setuptools.setup(
-    name="curvenote-template",
-    description="Helper library for curvenote versioning and tracking with Jupyter notebooks",
+    name="curvenote_template",
+    description="Jinja-style templating for LaTeX documents by Curvenote",
     long_description=readme(),
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.7",
         "Topic :: Text Processing :: Linguistic",
@@ -23,6 +23,10 @@ setuptools.setup(
         "Intended Audience :: Information Technology",
         "Intended Audience :: Financial and Insurance Industry",
     ],
+    entry_points='''
+        [console_scripts]
+        curvenote_template=curvenote_template.__main__:main
+    ''',
     url="http://curvenote.com",
     version=__version__,
     author="iooxa inc.",

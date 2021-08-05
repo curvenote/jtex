@@ -1,4 +1,5 @@
 -r requirements.txt
+build
 black
 isort
 pylint
@@ -7,3 +8,4 @@ pytest-cov
 pytest-watch
 sphinx
 twine
+m2r

@@ -8,7 +8,7 @@ def test_cli_build():
 
     with tempfile.TemporaryDirectory() as tmp_dir:
         CLI_CMD = (
-            f"python -m curvenote_template build {tmp_dir} "
+            f"curvenote_template build {tmp_dir} "
             f"{os.path.join(dir, 'data', 'cn')} "
             f"{os.path.join(dir, 'data', 'cn', 'template')} "
         )
