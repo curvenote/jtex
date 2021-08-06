@@ -47,6 +47,14 @@ def validate_enum_options(
 class TestOptionsSchema(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp_dir = tempfile.mkdtemp()
+        self.config_schema_only = squirt_to_file(
+            self.tmp_dir,
+            """
+            map:
+                config:
+                    include: config
+            """,
+            )
 
     def tearDown(self) -> None:
         shutil.rmtree(self.tmp_dir)
@@ -201,17 +209,8 @@ class TestOptionsSchema(unittest.TestCase):
         assert config is not None
 
     def test_config_aside(self):
-        config_schema = squirt_to_file(
-            self.tmp_dir,
-            """
-        map:
-            config:
-                include: config
-        """,
-        )
-
         validate_enum_options(
-            config_schema,
+            self.config_schema_only,
             self.tmp_dir,
             """
             config:
@@ -223,17 +222,8 @@ class TestOptionsSchema(unittest.TestCase):
         )
 
     def test_config_callout(self):
-        config_schema = squirt_to_file(
-            self.tmp_dir,
-            """
-        map:
-            config:
-                include: config
-        """,
-        )
-
         validate_enum_options(
-            config_schema,
+            self.config_schema_only,
             self.tmp_dir,
             """
             config:
@@ -245,17 +235,8 @@ class TestOptionsSchema(unittest.TestCase):
         )
 
     def test_config_code(self):
-        config_schema = squirt_to_file(
-            self.tmp_dir,
-            """
-        map:
-            config:
-                include: config
-        """,
-        )
-
         validate_enum_options(
-            config_schema,
+            self.config_schema_only,
             self.tmp_dir,
             """
             config:
@@ -265,3 +246,93 @@ class TestOptionsSchema(unittest.TestCase):
             "code",
             ["default", "verbatim", "highlight", "code.def"],
         )
+
+    def test_config_options_draft(self):
+        yml_to_test = squirt_to_file(
+            self.tmp_dir,
+            """
+            config:
+                options:
+                    draft:
+                        type: bool
+                        default: false
+                        required: false
+            """
+        )
+        schema = YamlSchema(
+            source_file=yml_to_test, schema_files=[CONFIG_SCHEMA, self.config_schema_only]
+        )
+        schema.validate(raise_exception=True)
+
+    def test_config_options_bool(self):
+        yml_to_test = squirt_to_file(
+            self.tmp_dir,
+            """
+            config:
+                options:
+                    draft:
+                        type: bool
+                        default: false
+                        required: false
+            """
+        )
+        schema = YamlSchema(
+            source_file=yml_to_test, schema_files=[CONFIG_SCHEMA, self.config_schema_only]
+        )
+        schema.validate(raise_exception=True)
+
+    def test_config_options_choice(self):
+        yml_to_test = squirt_to_file(
+            self.tmp_dir,
+            """
+            config:
+                options:
+                    journal_name:
+                        type: choice
+                        options:
+                            - option a
+                            - option b
+                            - option c
+                        default: option b
+                        required: true
+            """
+        )
+        schema = YamlSchema(
+            source_file=yml_to_test, schema_files=[CONFIG_SCHEMA, self.config_schema_only]
+        )
+        schema.validate(raise_exception=True)
+
+    def test_config_options_corresponding_author(self):
+        yml_to_test = squirt_to_file(
+            self.tmp_dir,
+            """
+            config:
+                options:
+                    journal_name:
+                        type: corresponding_author
+                        required: true
+            """
+        )
+        schema = YamlSchema(
+            source_file=yml_to_test, schema_files=[CONFIG_SCHEMA, self.config_schema_only]
+        )
+        schema.validate(raise_exception=True)
+
+    def test_config_options_dict(self):
+        yml_to_test = squirt_to_file(
+            self.tmp_dir,
+            """
+            config:
+                options:
+                    some_dict:
+                        type: dict
+                        properties:
+                            - propA
+                            - propB
+                        required: true
+            """
+        )
+        schema = YamlSchema(
+            source_file=yml_to_test, schema_files=[CONFIG_SCHEMA, self.config_schema_only]
+        )
+        schema.validate(raise_exception=True)
