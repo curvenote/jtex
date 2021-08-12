@@ -50,8 +50,16 @@ schema;config:
       map:
         regex;([a-z]{1}[a-z0-9]{0,63}):
           map:
+            description:
+              type: str
             required:
               type: bool
+            condition:
+              map:
+                option:
+                  type: str
+                value:
+                  type: str
 
     # set per template but can be overridden by the user
     options:
@@ -61,7 +69,17 @@ schema;config:
           map:
             type: # note this is a key name
               type: str
-              enum: ["bool", "str", "choice", "dict", "corresponding_author"]
+              enum:
+                [
+                  "bool",
+                  "str",
+                  "choice",
+                  "dict",
+                  "corresponding_author",
+                  "keywords",
+                ]
+            description:
+              type: str
             properties:
               seq:
                 - type: str
@@ -73,3 +91,9 @@ schema;config:
               type: any
             required:
               type: bool
+            condition:
+              map:
+                option:
+                  type: str
+                value:
+                  type: str
