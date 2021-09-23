@@ -70,14 +70,7 @@ schema;config:
             type: # note this is a key name
               type: str
               enum:
-                [
-                  "bool",
-                  "str",
-                  "choice",
-                  "dict",
-                  "corresponding_author",
-                  "keywords",
-                ]
+                ["bool", "str", "choice", "corresponding_author", "keywords"]
             description:
               type: str
             properties:

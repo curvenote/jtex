@@ -318,21 +318,3 @@ class TestOptionsSchema(unittest.TestCase):
         )
         schema.validate(raise_exception=True)
 
-    def test_config_options_dict(self):
-        yml_to_test = squirt_to_file(
-            self.tmp_dir,
-            """
-            config:
-                options:
-                    some_dict:
-                        type: dict
-                        properties:
-                            - propA
-                            - propB
-                        required: true
-            """
-        )
-        schema = YamlSchema(
-            source_file=yml_to_test, schema_files=[CONFIG_SCHEMA, self.config_schema_only]
-        )
-        schema.validate(raise_exception=True)
