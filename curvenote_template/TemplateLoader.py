@@ -10,7 +10,10 @@ from distutils.dir_util import copy_tree
 from .TemplateRenderer import TemplateRenderer
 from .TemplateOptions import TemplateOptions
 
-DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename("curvenote_template", "builtin_template")
+DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename(
+    "curvenote_template", "builtin_template"
+)
+
 
 class TemplateLoader:
     def __init__(self, target_folder: str):
@@ -73,9 +76,7 @@ class TemplateLoader:
         self._template_name = "builtin"
         renderer = TemplateRenderer()
         renderer.use_loader(
-            PackageLoader(
-                "curvenote_template", os.path.join("builtin_template")
-            )
+            PackageLoader("curvenote_template", os.path.join("builtin_template"))
         )
 
         return TemplateOptions(DEFAULT_TEMPLATE_PATH), renderer

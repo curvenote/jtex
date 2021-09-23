@@ -1,4 +1,3 @@
-
 from curvenote_template.TexFormat import TexFormat
 import os
 import pkg_resources
@@ -70,7 +69,6 @@ class TemplateOptions:
                 raise KeyError(f"{key} not found")
             rv = rv[key]
         return rv
-
 
     def validate_user_options(self, user_options: Dict):
         """
