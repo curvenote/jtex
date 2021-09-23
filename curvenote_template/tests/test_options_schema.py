@@ -173,15 +173,12 @@ class TestOptionsSchema(unittest.TestCase):
 
                 tagged:
                   - id: abstract
-                    tag: abstract
                     description: The Abstract
                     required: false
                   - id: abstract_fr
-                    tag: abstract-fr
                     description: French Abstract
                     required: true
                   - id: preface
-                    tag: preface
                     description: The preface. max 500 words
                     required: false
                     words: 500
@@ -190,15 +187,17 @@ class TestOptionsSchema(unittest.TestCase):
                       value: proceedings
                       required: true
                   - id: acknowledgements
-                    tag: acknowledgements
                     description: Acknowledge all collaborators, data and funding sources
                     required: false
 
                 options:
                   - type: bool
+                    id: draft
                     default: true
                     required: false
                   - type: str
+                    id: email
+                    title: Your Email
                     required: false
                   - type: choice
                     id: some_id
