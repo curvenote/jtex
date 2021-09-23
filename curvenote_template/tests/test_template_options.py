@@ -4,7 +4,10 @@ import pytest
 import pkg_resources
 from curvenote_template.TemplateOptions import TemplateOptions
 
-DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename("curvenote_template", "builtin_template")
+DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename(
+    "curvenote_template", "builtin_template"
+)
+
 
 def test_defaults():
     options = TemplateOptions(DEFAULT_TEMPLATE_PATH)

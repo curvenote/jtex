@@ -2,7 +2,6 @@ import os
 import subprocess
 import tempfile
 
-
 def test_cli_build():
     dir, _ = os.path.split(os.path.realpath(__file__))
 
@@ -10,7 +9,7 @@ def test_cli_build():
         CLI_CMD = (
             f"curvenote_template build {tmp_dir} "
             f"{os.path.join(dir, 'data', 'cn')} "
-            f"{os.path.join(dir, 'data', 'cn', 'template')} "
+            f"{os.path.join(dir, 'data', 'cn', 'template')}"
         )
         ret_val = subprocess.run(CLI_CMD, shell=True)
         assert ret_val.returncode == 0

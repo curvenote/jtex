@@ -31,6 +31,8 @@ config:
   tagged:
     abstract:
       required: false
+
+  options: []
 # options:
 #   watermark:
 #     type: bool
