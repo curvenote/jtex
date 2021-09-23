@@ -29,18 +29,22 @@ config:
     hidelinks: true
 
   tagged:
-    abstract:
+    - id: abstract
+      tag: abstract
+      description: The Abstract
       required: false
+      condition:
+        option: an_option_id
+        value: some value-1
 
-  options: []
-# options:
-#   watermark:
-#     type: bool
-#     default: true
-#     required: false
-#   corresponding_email:
-#     type: str
-#     required: true
-#   draft:
-#     type: bool
-#     required: false
+  options:
+    - type: bool
+      id: watermark
+      default: true
+      required: false
+    - type: str
+      id: corresponding_email
+      required: true
+    - type: bool
+      id: draft
+      required: false

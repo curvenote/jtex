@@ -172,14 +172,27 @@ class TestOptionsSchema(unittest.TestCase):
                     hidelinks: true
 
                 tagged:
-                    abstract:
-                        required: false
-                    abstract_fr:
-                        required: true
-                    preface:
-                        required: false
-                    acknowledgements:
-                        required: false
+                  - id: abstract
+                    tag: abstract
+                    description: The Abstract
+                    required: false
+                  - id: abstract_fr
+                    tag: abstract-fr
+                    description: French Abstract
+                    required: true
+                  - id: preface
+                    tag: preface
+                    description: The preface. max 500 words
+                    required: false
+                    words: 500
+                    condition:
+                      option: publication_type
+                      value: proceedings
+                      required: true
+                  - id: acknowledgements
+                    tag: acknowledgements
+                    description: Acknowledge all collaborators, data and funding sources
+                    required: false
 
                 options:
                   - type: bool
@@ -187,6 +200,20 @@ class TestOptionsSchema(unittest.TestCase):
                     required: false
                   - type: str
                     required: false
+                  - type: choice
+                    id: some_id
+                    title: Another Title 1-1
+                    options:
+                      - option a
+                      - option b
+                      - option c
+                    default: option b
+                    required: true
+                    condition:
+                      option: some_option_id
+                      value: some value
+                  - type: choice
+                    id: other_id
             """,
         )
 

@@ -29,7 +29,8 @@ config:
     hidelinks: true
 
   tagged:
-    abstract:
+    - id: abstract
+      tag: abstract
       required: false
 
   options: []
