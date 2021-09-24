@@ -323,9 +323,10 @@ class TestOptionsSchema(unittest.TestCase):
             """
             config:
               options:
-                - type: corresponding_author
+                - id: corresponding_author
+                  type: corresponding_author
                   required: true
-                  mulitple: true
+                  multiple: true
             """,
         )
         schema = YamlSchema(

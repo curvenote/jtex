@@ -13,7 +13,6 @@ def test_defaults():
     options = TemplateOptions(DEFAULT_TEMPLATE_PATH)
     assert options.get("metadata.title") == "Plain LaTeX (built-in)"
 
-
 def test_find():
     assert TemplateOptions.find("a", dict(a=1)) == 1
     with pytest.raises(KeyError):
