@@ -1,8 +1,9 @@
-import re
 import logging
+import re
 from os import path
 from typing import Dict, List, Optional, Union
-from jinja2 import Environment, FileSystemLoader, BaseLoader, Undefined
+
+from jinja2 import BaseLoader, Environment, FileSystemLoader, Undefined
 
 
 class SilentUndefined(Undefined):

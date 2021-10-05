@@ -1,8 +1,10 @@
-import pytest
 import tempfile
 from os import path
+
+import pytest
 from dateutil import parser
 from jinja2.loaders import PackageLoader
+
 from curvenote_template.TemplateRenderer import TemplateRenderer
 
 

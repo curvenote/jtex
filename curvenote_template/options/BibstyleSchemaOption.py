@@ -1,7 +1,8 @@
-import re
 import logging
-from .SchemaOptionDefs import SchemaOptionDefs
+import re
+
 from .BooleanSchemaOption import BooleanSchemaOption
+from .SchemaOptionDefs import SchemaOptionDefs
 
 
 class BibstyleSchemaOption(BooleanSchemaOption):

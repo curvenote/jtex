@@ -1,5 +1,5 @@
-from .SchemaOptionDefs import SchemaOptionDefs
 from .BooleanSchemaOption import BooleanSchemaOption
+from .SchemaOptionDefs import SchemaOptionDefs
 
 
 class RaggedBottomSchemaOption(BooleanSchemaOption):

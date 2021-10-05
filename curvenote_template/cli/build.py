@@ -1,11 +1,13 @@
-import typer
-import yaml
+import glob
 import logging
 import os
-import glob
 from pathlib import Path, PurePath
 from shutil import copyfile
-from .. import TemplateLoader, LatexBuilder, DocModel
+
+import typer
+import yaml
+
+from .. import DocModel, LatexBuilder, TemplateLoader
 
 
 def build(

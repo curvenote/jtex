@@ -1,4 +1,5 @@
 import pytest
+
 from curvenote_template.options.NatbibSchemaOption import citep_transform
 
 

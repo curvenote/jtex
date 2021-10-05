@@ -1,6 +1,7 @@
+from typing import Dict, Optional, Union
+
 from .SchemaOption import SchemaOption
 from .SchemaOptionDefs import CustomTemplateDefs, SchemaOptionDefs
-from typing import Dict, Optional, Union
 
 
 class StringSchemaOption(SchemaOption):

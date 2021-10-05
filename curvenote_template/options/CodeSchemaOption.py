@@ -1,4 +1,4 @@
-from .SchemaOptionDefs import SchemaOptionDefs, CustomTemplateDefs
+from .SchemaOptionDefs import CustomTemplateDefs, SchemaOptionDefs
 from .StringSchemaOption import StringSchemaOption
 
 

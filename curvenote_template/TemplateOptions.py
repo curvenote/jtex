@@ -1,11 +1,12 @@
-from curvenote_template.TexFormat import TexFormat
-import os
-import pkg_resources
 import logging
+import os
+from typing import Any, Dict, Optional, Set, Union, cast
+
+import pkg_resources
 import yaml
-from typing import Dict, Any, Optional, Set, Union, cast
 from pykwalify.core import Core
 
+from curvenote_template.TexFormat import TexFormat
 
 SCHEMA_PATH = pkg_resources.resource_filename("curvenote_template", "schema")
 

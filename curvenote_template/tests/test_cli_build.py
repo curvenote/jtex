@@ -2,6 +2,7 @@ import os
 import subprocess
 import tempfile
 
+
 def test_cli_build():
     dir, _ = os.path.split(os.path.realpath(__file__))
 
@@ -28,6 +29,14 @@ def test_cli_build():
             "\\begin{abstract}\n"
             "Lorem Abstractium\n"
             "\\end{abstract}\n"
+            "Option text: Some String\n"
+            "Option flag - this content was added because the flag was True\n"
+            "Option keywords:\n"
+            "a,b,c,\n"
+            "Choose:\n"
+            "A\n"
+            "Corresponding:\n"
+            "Joe Blogs, joe@bloggs.com\n"
             "Lorem ipsum\n"
             "\\end{document}\n"
         )

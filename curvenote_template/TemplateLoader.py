@@ -1,14 +1,16 @@
+import glob
 import logging
 import os
-import glob
-from re import template
-from jinja2.loaders import PackageLoader
-import pkg_resources
-from typing import Dict, Optional, Tuple
-from shutil import copyfile
 from distutils.dir_util import copy_tree
-from .TemplateRenderer import TemplateRenderer
+from re import template
+from shutil import copyfile
+from typing import Dict, Optional, Tuple
+
+import pkg_resources
+from jinja2.loaders import PackageLoader
+
 from .TemplateOptions import TemplateOptions
+from .TemplateRenderer import TemplateRenderer
 
 DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename(
     "curvenote_template", "builtin_template"

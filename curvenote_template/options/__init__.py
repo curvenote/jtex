@@ -1,13 +1,12 @@
-from .StringSchemaOption import StringSchemaOption
-from .BooleanSchemaOption import BooleanSchemaOption
-from .SchemaOptionDefs import SchemaOptionDefs, CustomTemplateDefs
-
 from .AsideSchemaOption import AsideSchemaOption
+from .BibstyleSchemaOption import BibstyleSchemaOption
+from .BooleanSchemaOption import BooleanSchemaOption
 from .CalloutSchemaOption import CalloutSchemaOption
+from .CitestyleSchemaOption import CitestyleSchemaOption
 from .CodeSchemaOption import CodeSchemaOption
 from .HideLinksSchemaOption import HideLinksSchemaOption
-from .RaggedBottomOption import RaggedBottomSchemaOption
-from .SloppySchemaOption import SloppySchemaOption
 from .NatbibSchemaOption import NatbibSchemaOption
-from .BibstyleSchemaOption import BibstyleSchemaOption
-from .CitestyleSchemaOption import CitestyleSchemaOption
+from .RaggedBottomOption import RaggedBottomSchemaOption
+from .SchemaOptionDefs import CustomTemplateDefs, SchemaOptionDefs
+from .SloppySchemaOption import SloppySchemaOption
+from .StringSchemaOption import StringSchemaOption

@@ -1,12 +1,11 @@
 import os
+import shutil
 import tempfile
 import unittest
-import shutil
-import pytest
 from typing import List
 
+import pytest
 from pykwalify.core import Core as YamlSchema
-
 
 THE_PATH = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),

@@ -1,5 +1,6 @@
-from .SchemaOptionDefs import CustomTemplateDefs, SchemaOptionDefs
 from typing import Dict, Optional, Union
+
+from .SchemaOptionDefs import CustomTemplateDefs, SchemaOptionDefs
 
 
 class SchemaOption:

@@ -1,7 +1,9 @@
 import os
 import re
-import pytest
+
 import pkg_resources
+import pytest
+
 from curvenote_template.TemplateOptions import TemplateOptions
 
 DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename(
@@ -12,6 +14,7 @@ DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename(
 def test_defaults():
     options = TemplateOptions(DEFAULT_TEMPLATE_PATH)
     assert options.get("metadata.title") == "Plain LaTeX (built-in)"
+
 
 def test_find():
     assert TemplateOptions.find("a", dict(a=1)) == 1
