@@ -10,5 +10,26 @@
 [-tagged.abstract-]
 \end{abstract}
 [# endif #]
+[# if options and options.text #]
+Option text: [-options.text-]
+[# endif #]
+[# if options and options.flag #]
+Option flag - this content was added because the flag was True
+[# endif #]
+[# if options and options.keywords #]
+Option keywords:
+[# for keyword in options.keywords #]
+[-keyword-]
+[# endfor #]
+[# endif #]
+[# if options and options.choose #]
+[-options.choose-]
+[# endif #]
+[# if options and options.corresponding_author #]
+Option keywords:
+[# for corresponding in options.corresponding_author #]
+[-corresponding.name-], [-corresponding.email-]
+[# endfor #]
+[# endif #]
 [-CONTENT-]
 \end{document}

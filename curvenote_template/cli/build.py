@@ -45,16 +45,6 @@ def build(
         file_okay=False,
         resolve_path=True,
     ),
-    user_options: Path = typer.Option(
-        None,
-        help=(
-            "A path to a local YAML file containing user options to apply to the tempalte."
-        ),
-        exists=True,
-        dir_okay=False,
-        file_okay=True,
-        resolve_path=True,
-    ),
     lipsum: bool = typer.Option(
         False,
         help=(
@@ -87,10 +77,7 @@ def build(
         typer.echo(f"Using template at: {template_path}")
     else:
         typer.echo("Using built in template")
-    if user_options:
-        typer.echo(f"User Options file: {user_options}")
-    else:
-        typer.echo("No user options set")
+
     if lipsum:
         typer.echo(f"Adding lipsum package to final document")
 

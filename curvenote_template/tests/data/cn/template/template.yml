@@ -38,13 +38,32 @@ config:
         value: some value-1
 
   options:
-    - type: bool
-      id: watermark
-      default: true
-      required: false
-    - type: str
-      id: corresponding_email
+    - id: corresponding_author
+      type: corresponding_author
+      description: |
+        Select one or more author as the corresponding author and provide an email address for each
       required: true
-    - type: bool
-      id: draft
-      required: false
+    - id: flag
+      type: bool
+      description: |
+        Some boolean option
+      required: true
+    - id: text
+      type: str
+      description: |
+        Some text field
+      required: true
+    - id: choose
+      type: choice
+      description: |
+        One of N
+      required: true
+      options:
+        - A
+        - B
+        - C
+    - id: keywords
+      type: keywords
+      description: |
+        needs keywords
+      required: true
