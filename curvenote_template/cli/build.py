@@ -54,6 +54,12 @@ def build(
             "For use in template testing where `example/content.tex` uses the lipsum package."
         ),
     ),
+    strict: bool = typer.Option(
+        False,
+        help=(
+            "If true, then missing required tagged content or options will halt the process."
+        ),
+    ),
 ):
     typer.echo(f"Target folder: {target_folder}")
 
@@ -112,7 +118,7 @@ def build(
     typer.echo("Template loaded")
 
     builder = LatexBuilder(template_options, renderer, str(target_folder))
-    builder.build(DocModel(docmodel), [content], bibtex=None)
+    builder.build(DocModel(docmodel), [content], bibtex=None, raise_if_invalid=strict)
 
     if bib_file.exists():
         copyfile(bib_file, os.path.join(str(target_folder), "main.bib"))
