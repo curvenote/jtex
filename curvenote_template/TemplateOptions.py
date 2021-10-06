@@ -46,7 +46,7 @@ class TemplateOptions:
         return self._template_location
 
     def get_allowed_tags(self) -> Set[str]:
-        return set(self.tagged.keys())
+        return set(map(lambda item: item["id"], self.tagged))
 
     def get(self, path: str, default: Any = None):
         """
