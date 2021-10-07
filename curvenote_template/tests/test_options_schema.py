@@ -180,7 +180,8 @@ class TestOptionsSchema(unittest.TestCase):
                   - id: preface
                     description: The preface. max 500 words
                     required: false
-                    words: 500
+                    words:
+                      max: 500
                     condition:
                       option: publication_type
                       value: proceedings

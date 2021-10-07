@@ -61,7 +61,11 @@ schema;config:
             required:
               type: bool
             words:
-              type: number
+              map:
+                min:
+                  type: number
+                max:
+                  type: number
             condition:
               map:
                 option:
