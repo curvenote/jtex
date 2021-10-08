@@ -1,16 +1,21 @@
+import glob
 import logging
 import os
-import glob
-from re import template
-from jinja2.loaders import PackageLoader
-import pkg_resources
-from typing import Dict, Optional, Tuple
-from shutil import copyfile
 from distutils.dir_util import copy_tree
-from .TemplateRenderer import TemplateRenderer
-from .TemplateOptions import TemplateOptions
+from re import template
+from shutil import copyfile
+from typing import Dict, Optional, Tuple
 
-DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename("curvenote_template", "builtin_template")
+import pkg_resources
+from jinja2.loaders import PackageLoader
+
+from .TemplateOptions import TemplateOptions
+from .TemplateRenderer import TemplateRenderer
+
+DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename(
+    "curvenote_template", "builtin_template"
+)
+
 
 class TemplateLoader:
     def __init__(self, target_folder: str):
@@ -73,9 +78,7 @@ class TemplateLoader:
         self._template_name = "builtin"
         renderer = TemplateRenderer()
         renderer.use_loader(
-            PackageLoader(
-                "curvenote_template", os.path.join("builtin_template")
-            )
+            PackageLoader("curvenote_template", os.path.join("builtin_template"))
         )
 
         return TemplateOptions(DEFAULT_TEMPLATE_PATH), renderer

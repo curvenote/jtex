@@ -1,9 +1,10 @@
-import os
 import logging
+import os
 import shutil
-from typing import Any, Dict, NewType, Optional, List
+from typing import Any, Dict, List, NewType, Optional
+
+from . import DefBuilder, DocModel, TemplateOptions, TemplateRenderer
 from .utils import log_and_raise_errors
-from . import DefBuilder, TemplateOptions, TemplateRenderer, DocModel
 
 logger = logging.getLogger()
 
@@ -16,8 +17,27 @@ class LatexBuilder:
         self.renderer = renderer
         self.target_folder = target_folder
 
-    def build(self, data: DocModel, content: List[str], bibtex: Optional[str] = None):
+    def validate(self, data: DocModel, raise_if_invalid):
+        logging.info("Validating docmodel data...")
+        required_options = [
+            opt["id"] for opt in self.options.user_options if "required" in opt and opt["required"]
+        ]
+        missing_options = [r for r in required_options if r not in data["options"]]
+        logging.warn("Some REQUIRED user options are not provided: %s", missing_options)
+        if len(missing_options) > 0 and raise_if_invalid:
+            raise ValueError(
+                "Some REQUIRED user options are not provided: %s" % missing_options
+            )
+
+    def build(
+        self,
+        data: DocModel,
+        content: List[str],
+        bibtex: Optional[str] = None,
+        raise_if_invalid: bool = True,
+    ):
         logging.info("Rendering template...")
+        self.validate(data, raise_if_invalid)
         if self.renderer is None:
             logging.info(
                 "TemplateRender is not available, TemplateLoader not initialized"

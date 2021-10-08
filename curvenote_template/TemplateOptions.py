@@ -1,12 +1,12 @@
-
-from curvenote_template.TexFormat import TexFormat
-import os
-import pkg_resources
 import logging
+import os
+from typing import Any, Dict, Optional, Set, Union, cast
+
+import pkg_resources
 import yaml
-from typing import Dict, Any, Optional, Set, Union, cast
 from pykwalify.core import Core
 
+from curvenote_template.TexFormat import TexFormat
 
 SCHEMA_PATH = pkg_resources.resource_filename("curvenote_template", "schema")
 
@@ -46,7 +46,7 @@ class TemplateOptions:
         return self._template_location
 
     def get_allowed_tags(self) -> Set[str]:
-        return set(self.tagged.keys())
+        return set(map(lambda item: item["id"], self.tagged))
 
     def get(self, path: str, default: Any = None):
         """
@@ -70,7 +70,6 @@ class TemplateOptions:
                 raise KeyError(f"{key} not found")
             rv = rv[key]
         return rv
-
 
     def validate_user_options(self, user_options: Dict):
         """

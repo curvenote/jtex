@@ -1,12 +1,11 @@
 import os
+import shutil
 import tempfile
 import unittest
-import shutil
-import pytest
 from typing import List
 
+import pytest
 from pykwalify.core import Core as YamlSchema
-
 
 THE_PATH = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
@@ -54,7 +53,7 @@ class TestOptionsSchema(unittest.TestCase):
                 config:
                     include: config
             """,
-            )
+        )
 
     def tearDown(self) -> None:
         shutil.rmtree(self.tmp_dir)
@@ -172,23 +171,48 @@ class TestOptionsSchema(unittest.TestCase):
                     hidelinks: true
 
                 tagged:
-                    abstract:
-                        required: false
-                    abstract_fr:
-                        required: true
-                    preface:
-                        required: false
-                    acknowledgements:
-                        required: false
+                  - id: abstract
+                    description: The Abstract
+                    required: false
+                  - id: abstract_fr
+                    description: French Abstract
+                    required: true
+                  - id: preface
+                    description: The preface. max 500 words
+                    required: false
+                    words:
+                      max: 500
+                    condition:
+                      option: publication_type
+                      value: proceedings
+                      required: true
+                  - id: acknowledgements
+                    description: Acknowledge all collaborators, data and funding sources
+                    required: false
 
                 options:
-                    watermark:
-                        type: bool
-                        default: true
-                        required: false
-                    corresponding_email:
-                        type: str
-                        required: false
+                  - type: bool
+                    id: draft
+                    default: true
+                    required: false
+                  - type: str
+                    id: email
+                    title: Your Email
+                    required: false
+                  - type: choice
+                    id: some_id
+                    title: Another Title 1-1
+                    options:
+                      - option a
+                      - option b
+                      - option c
+                    default: option b
+                    required: true
+                    condition:
+                      option: some_option_id
+                      value: some value
+                  - type: choice
+                    id: other_id
             """,
         )
 
@@ -227,8 +251,8 @@ class TestOptionsSchema(unittest.TestCase):
             self.tmp_dir,
             """
             config:
-                schema:
-                    <key>: <value>
+              schema:
+                <key>: <value>
             """,
             "callout",
             ["default", "framed", "mdframed", "callout.def"],
@@ -240,44 +264,28 @@ class TestOptionsSchema(unittest.TestCase):
             self.tmp_dir,
             """
             config:
-                schema:
-                    <key>: <value>
+              schema:
+                <key>: <value>
             """,
             "code",
             ["default", "verbatim", "highlight", "code.def"],
         )
-
-    def test_config_options_draft(self):
-        yml_to_test = squirt_to_file(
-            self.tmp_dir,
-            """
-            config:
-                options:
-                    draft:
-                        type: bool
-                        default: false
-                        required: false
-            """
-        )
-        schema = YamlSchema(
-            source_file=yml_to_test, schema_files=[CONFIG_SCHEMA, self.config_schema_only]
-        )
-        schema.validate(raise_exception=True)
 
     def test_config_options_bool(self):
         yml_to_test = squirt_to_file(
             self.tmp_dir,
             """
             config:
-                options:
-                    draft:
-                        type: bool
-                        default: false
-                        required: false
-            """
+              options:
+                - type: bool
+                  id: draft
+                  default: false
+                  required: false
+            """,
         )
         schema = YamlSchema(
-            source_file=yml_to_test, schema_files=[CONFIG_SCHEMA, self.config_schema_only]
+            source_file=yml_to_test,
+            schema_files=[CONFIG_SCHEMA, self.config_schema_only],
         )
         schema.validate(raise_exception=True)
 
@@ -286,19 +294,26 @@ class TestOptionsSchema(unittest.TestCase):
             self.tmp_dir,
             """
             config:
-                options:
-                    journal_name:
-                        type: choice
-                        options:
-                            - option a
-                            - option b
-                            - option c
-                        default: option b
-                        required: true
-            """
+              options:
+                - type: choice
+                  id: some_id
+                  title: Another Title 1-1
+                  options:
+                    - option a
+                    - option b
+                    - option c
+                  default: option b
+                  required: true
+                  condition:
+                    option: some_option_id
+                    value: some value
+                - type: choice
+                  id: other_id
+            """,
         )
         schema = YamlSchema(
-            source_file=yml_to_test, schema_files=[CONFIG_SCHEMA, self.config_schema_only]
+            source_file=yml_to_test,
+            schema_files=[CONFIG_SCHEMA, self.config_schema_only],
         )
         schema.validate(raise_exception=True)
 
@@ -307,32 +322,15 @@ class TestOptionsSchema(unittest.TestCase):
             self.tmp_dir,
             """
             config:
-                options:
-                    journal_name:
-                        type: corresponding_author
-                        required: true
-            """
+              options:
+                - id: corresponding_author
+                  type: corresponding_author
+                  required: true
+                  multiple: true
+            """,
         )
         schema = YamlSchema(
-            source_file=yml_to_test, schema_files=[CONFIG_SCHEMA, self.config_schema_only]
-        )
-        schema.validate(raise_exception=True)
-
-    def test_config_options_dict(self):
-        yml_to_test = squirt_to_file(
-            self.tmp_dir,
-            """
-            config:
-                options:
-                    some_dict:
-                        type: dict
-                        properties:
-                            - propA
-                            - propB
-                        required: true
-            """
-        )
-        schema = YamlSchema(
-            source_file=yml_to_test, schema_files=[CONFIG_SCHEMA, self.config_schema_only]
+            source_file=yml_to_test,
+            schema_files=[CONFIG_SCHEMA, self.config_schema_only],
         )
         schema.validate(raise_exception=True)

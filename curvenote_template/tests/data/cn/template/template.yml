@@ -29,16 +29,41 @@ config:
     hidelinks: true
 
   tagged:
-    abstract:
+    - id: abstract
+      tag: abstract
+      description: The Abstract
       required: false
-# options:
-#   watermark:
-#     type: bool
-#     default: true
-#     required: false
-#   corresponding_email:
-#     type: str
-#     required: true
-#   draft:
-#     type: bool
-#     required: false
+      condition:
+        option: an_option_id
+        value: some value-1
+
+  options:
+    - id: corresponding_author
+      type: corresponding_author
+      description: |
+        Select one or more author as the corresponding author and provide an email address for each
+      required: true
+    - id: flag
+      type: bool
+      description: |
+        Some boolean option
+      required: true
+    - id: text
+      type: str
+      description: |
+        Some text field
+      required: true
+    - id: choose
+      type: choice
+      description: |
+        One of N
+      required: true
+      options:
+        - A
+        - B
+        - C
+    - id: keywords
+      type: keywords
+      description: |
+        needs keywords
+      required: true

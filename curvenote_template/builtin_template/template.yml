@@ -29,7 +29,14 @@ config:
     hidelinks: true
 
   tagged:
-    abstract:
+    - id: abstract
+      tag: abstract
       required: false
+      description: |
+        An abstract is a short summary of your research paper or report. A good abstract will prepare readers for
+        the detailed information to follow, communicate the essence of the article and help readers take away and
+        remember key points.
+      words:
+        max: 600
 
-  options: {}
+  options: []

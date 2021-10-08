@@ -1,11 +1,12 @@
-import sys
-import typer
 import logging
-from .validate import validate
-from .build_lite import build_lite
-from .build import build
+import sys
+
+import typer
 
 from ..version import __version__
+from .build import build
+from .build_lite import build_lite
+from .validate import validate
 
 logger = logging.getLogger()
 

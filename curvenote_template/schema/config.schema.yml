@@ -46,43 +46,54 @@ schema;config:
     # is tagged content is not provided tagged elements in the
     # template will be omitted
     tagged:
-      allowempty: true
-      map:
-        regex;([a-z]{1}[a-z0-9]{0,63}):
-          map:
+      seq:
+        - map:
+            id:
+              type: str
+              required: true
+              pattern: ([a-z]{1}[a-z0-9_]{0,63})
+            tag:
+              type: str
+              pattern: ([a-z]{1}[a-z0-9-]{0,63})
             description:
+              required: true
               type: str
             required:
               type: bool
+            words:
+              map:
+                min:
+                  type: number
+                max:
+                  type: number
             condition:
               map:
                 option:
                   type: str
+                  pattern: ([a-z]{1}[a-z0-9_]{0,63})
                 value:
                   type: str
+                required:
+                  type: bool
 
     # set per template but can be overridden by the user
     options:
-      allowempty: true
-      map:
-        regex;([a-z]{1}[a-z0-9_]{0,63}):
-          map:
+      seq:
+        - map:
             type: # note this is a key name
               type: str
+              required: true
               enum:
-                [
-                  "bool",
-                  "str",
-                  "choice",
-                  "dict",
-                  "corresponding_author",
-                  "keywords",
-                ]
+                ["bool", "str", "choice", "corresponding_author", "keywords"]
+            id:
+              type: str
+              required: true
+              pattern: ([a-z]{1}[a-z0-9_]{0,63})
+            title:
+              type: str
+              pattern: ([A-Za-z]{1}[A-Za-z0-9_-]{0,63})
             description:
               type: str
-            properties:
-              seq:
-                - type: str
             options:
               seq:
                 - type: str
@@ -91,9 +102,14 @@ schema;config:
               type: any
             required:
               type: bool
+            multiple:
+              type: bool
             condition:
               map:
                 option:
                   type: str
+                  pattern: ([a-z]{1}[a-z0-9_]{0,63})
                 value:
                   type: str
+                required:
+                  type: bool

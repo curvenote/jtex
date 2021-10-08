@@ -1,11 +1,13 @@
-import typer
-import yaml
+import glob
 import logging
 import os
-import glob
 from pathlib import Path, PurePath
 from shutil import copyfile
-from .. import TemplateLoader, LatexBuilder, DocModel
+
+import typer
+import yaml
+
+from .. import DocModel, LatexBuilder, TemplateLoader
 
 
 def build(
@@ -45,21 +47,17 @@ def build(
         file_okay=False,
         resolve_path=True,
     ),
-    user_options: Path = typer.Option(
-        None,
-        help=(
-            "A path to a local YAML file containing user options to apply to the tempalte."
-        ),
-        exists=True,
-        dir_okay=False,
-        file_okay=True,
-        resolve_path=True,
-    ),
     lipsum: bool = typer.Option(
         False,
         help=(
             "If specified will patch the document with '\\usepackage{lipsum}'."
             "For use in template testing where `example/content.tex` uses the lipsum package."
+        ),
+    ),
+    strict: bool = typer.Option(
+        False,
+        help=(
+            "If true, then missing required tagged content or options will halt the process."
         ),
     ),
 ):
@@ -87,10 +85,7 @@ def build(
         typer.echo(f"Using template at: {template_path}")
     else:
         typer.echo("Using built in template")
-    if user_options:
-        typer.echo(f"User Options file: {user_options}")
-    else:
-        typer.echo("No user options set")
+
     if lipsum:
         typer.echo(f"Adding lipsum package to final document")
 
@@ -123,7 +118,7 @@ def build(
     typer.echo("Template loaded")
 
     builder = LatexBuilder(template_options, renderer, str(target_folder))
-    builder.build(DocModel(docmodel), [content], bibtex=None)
+    builder.build(DocModel(docmodel), [content], bibtex=None, raise_if_invalid=strict)
 
     if bib_file.exists():
         copyfile(bib_file, os.path.join(str(target_folder), "main.bib"))

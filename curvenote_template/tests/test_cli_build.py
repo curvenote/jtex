@@ -10,7 +10,7 @@ def test_cli_build():
         CLI_CMD = (
             f"curvenote_template build {tmp_dir} "
             f"{os.path.join(dir, 'data', 'cn')} "
-            f"{os.path.join(dir, 'data', 'cn', 'template')} "
+            f"{os.path.join(dir, 'data', 'cn', 'template')}"
         )
         ret_val = subprocess.run(CLI_CMD, shell=True)
         assert ret_val.returncode == 0
@@ -29,6 +29,14 @@ def test_cli_build():
             "\\begin{abstract}\n"
             "Lorem Abstractium\n"
             "\\end{abstract}\n"
+            "Option text: Some String\n"
+            "Option flag - this content was added because the flag was True\n"
+            "Option keywords:\n"
+            "a,b,c,\n"
+            "Choose:\n"
+            "A\n"
+            "Corresponding:\n"
+            "Joe Blogs, joe@bloggs.com\n"
             "Lorem ipsum\n"
             "\\end{document}\n"
         )
