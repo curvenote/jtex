@@ -1,3 +1,3 @@
 from .cli import app
 
-app(prog_name="curvneote_template")
+app(prog_name="curvenote_template")
