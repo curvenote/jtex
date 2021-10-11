@@ -60,6 +60,12 @@ def build(
             "If true, then missing required tagged content or options will halt the process."
         ),
     ),
+    no_copy: bool = typer.Option(
+        False,
+        help=(
+            "If true, then image assets will not be copied into the target folder."
+        ),
+    ),
 ):
     typer.echo(f"Target folder: {target_folder}")
 
@@ -124,20 +130,25 @@ def build(
         copyfile(bib_file, os.path.join(str(target_folder), "main.bib"))
 
     typer.echo("Checking content_path for image assets")
-    image_types = ["*.png", "*.jpg", "*.jpeg", "*.eps", "*.gif", "*.bmp"]
-    image_files = []
-    for im_type in image_types:
-        image_files.extend(glob.glob(f"{content_path}/{im_type}"))
-    if len(image_files) > 0:
-        typer.echo(f"Found {len(image_files)} image assets")
-        assets_folder = os.path.join(target_folder, "assets")
-        os.makedirs(assets_folder, exist_ok=True)
-        for im_file_path in image_files:
-            _, filename = os.path.split(im_file_path)
-            dest = os.path.join(assets_folder, filename)
-            copyfile(im_file_path, dest)
-            typer.echo(f"Copied {filename} to {dest}")
+    typer.echo(content_path)
+    typer.echo(target_folder)
+    if no_copy:
+        typer.echo("--no-copy option is set - not copying image assets")
     else:
-        typer.echo("No image assets found")
+        image_types = ["*.png", "*.jpg", "*.jpeg", "*.eps", "*.gif", "*.bmp"]
+        image_files = []
+        for im_type in image_types:
+            image_files.extend(glob.glob(f"{content_path}/**/*/{im_type}"))
+        if len(image_files) > 0:
+            typer.echo(f"Found {len(image_files)} image assets")
+            for im_file_path in image_files:
+                src_path, filename = os.path.split(im_file_path)
+                internal_src_path = Path(src_path).relative_to(content_path)
+                os.makedirs(target_folder / internal_src_path, exist_ok=True)
+                dest = target_folder / internal_src_path / filename;
+                copyfile(im_file_path, dest)
+                typer.echo(f"Copied {filename} to {dest}")
+        else:
+            typer.echo("No image assets found")
 
     typer.echo("Done!")

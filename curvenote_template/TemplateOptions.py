@@ -102,7 +102,7 @@ class TemplateOptions:
         return cast(Dict, self.get("config.tagged", {}))
 
     @property
-    def user_options(self):
+    def config_options(self):
         """
         TODO
         """
