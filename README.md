@@ -2,7 +2,7 @@
 
 # Curvenote Template
 
-Curvenote Template is a command line tool (cli) for rendering LaTeX documents from jinja-style templates. This package uses [jinja2](https://pypi.org/project/Jinja2/) as the template engine with a modified enviroments and syntax that plays well with LaTeX's markup.
+Curvenote Template is a command line tool (cli) for rendering LaTeX documents from jinja-style templates. This package uses [jinja2](https://pypi.org/project/Jinja2/) as the template engine with a modified enviroment and syntax that plays well with LaTeX's markup.
 
 This allows you to build LaTeX documents driven by content, data and a template. We built this package while developing our template based PDF/LaTeX export system for [Curvenote](https://curvenote.com), where it is used to create documents from the templates on the [Curvenote Community Template Repo](https://github.com/curvenote/templates).
 
