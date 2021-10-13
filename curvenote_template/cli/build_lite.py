@@ -12,7 +12,7 @@ def build_lite(
     target: Path = typer.Argument(
         ...,
         help=(
-            "Local files to write the rendered content to. If TARGET exists it will be replaced"
+            "Name of a local file to write the rendered content to. If TARGET exists it will be replaced."
         ),
         resolve_path=True,
         file_okay=True,
@@ -21,8 +21,7 @@ def build_lite(
     docmodel_file: Path = typer.Argument(
         ...,
         help=(
-            "Path to a YAML file containing the DocModel required to render the template."
-            "For free-form rendering the DocModel is a free-dorm dict."
+            "Path to a YAML file containing the DocModel (a free-form dict) required to render the template."
         ),
         exists=True,
         dir_okay=False,
@@ -32,7 +31,7 @@ def build_lite(
     content_file: Path = typer.Argument(
         ...,
         help=(
-            "Path to a YAML file containing the DocModel required to render the template"
+            "Path to a file containing the main content to render"
         ),
         exists=True,
         dir_okay=False,
@@ -43,7 +42,7 @@ def build_lite(
         ...,
         help=(
             "Path to a file with a compatible LaTeX template e.g. mytemplate.tex."
-            "Intended for simple free-form usage with any template and matching DocModel data"
+            "The template should align with the data structure given by the DocModel"
         ),
         exists=True,
         dir_okay=False,
