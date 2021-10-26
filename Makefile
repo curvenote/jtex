@@ -19,6 +19,9 @@ build:
 	m2r README.md --overwrite
 	python -m build
 
+deploy-check:
+	python -m twine check dist/*
+
 deploy-test:
 	python -m twine upload --repository-url=https://test.pypi.org/legacy/ dist/*
 
