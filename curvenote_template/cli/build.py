@@ -130,15 +130,15 @@ def build(
         copyfile(bib_file, os.path.join(str(target_folder), "main.bib"))
 
     typer.echo("Checking content_path for image assets")
-    typer.echo(content_path)
-    typer.echo(target_folder)
+    typer.echo(f"Content Path: {content_path}")
+    typer.echo(f"Target Folder: {target_folder}")
     if no_copy:
         typer.echo("--no-copy option is set - not copying image assets")
     else:
         image_types = ["*.png", "*.jpg", "*.jpeg", "*.eps", "*.gif", "*.bmp"]
         image_files = []
         for im_type in image_types:
-            image_files.extend(glob.glob(f"{content_path}/**/*/{im_type}"))
+            image_files.extend(glob.glob(f"{content_path}/**/{im_type}", recursive=True))
         if len(image_files) > 0:
             typer.echo(f"Found {len(image_files)} image assets")
             for im_file_path in image_files:
