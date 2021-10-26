@@ -5,17 +5,14 @@ import setuptools
 sys.path[0:0] = ['curvenote_template']
 from version import __version__
 
-def readme():
-    if os.path.exists("README.rst"):
-        with open("README.rst") as file:
-            return file.read()
-    return ""
-
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
 
 setuptools.setup(
     name="curvenote_template",
     description="Jinja-style templating for LaTeX documents by Curvenote",
-    long_description=readme(),
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     classifiers=[
         "Development Status :: 4 - Beta",
         "License :: OSI Approved :: MIT License",
