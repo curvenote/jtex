@@ -30,9 +30,7 @@ def build_lite(
     ),
     content_file: Path = typer.Argument(
         ...,
-        help=(
-            "Path to a file containing the main content to render"
-        ),
+        help=("Path to a file containing the main content to render"),
         exists=True,
         dir_okay=False,
         file_okay=True,

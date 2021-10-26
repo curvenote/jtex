@@ -20,9 +20,15 @@ class LatexBuilder:
     def validate(self, data: DocModel, raise_if_invalid):
         logging.info("Validating docmodel data...")
         required_options = [
-            opt["id"] for opt in self.options.config_options if "required" in opt and opt["required"]
+            opt["id"]
+            for opt in self.options.config_options
+            if "required" in opt and opt["required"]
         ]
-        missing_options = [r for r in required_options if "options" in data and r not in data["options"]]
+        missing_options = [
+            r
+            for r in required_options
+            if "options" in data and r not in data["options"]
+        ]
         logging.warn("Some REQUIRED user options are not provided: %s", missing_options)
         if len(missing_options) > 0 and raise_if_invalid:
             raise ValueError(
