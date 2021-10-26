@@ -62,9 +62,7 @@ def build(
     ),
     no_copy: bool = typer.Option(
         False,
-        help=(
-            "If true, then image assets will not be copied into the target folder."
-        ),
+        help=("If true, then image assets will not be copied into the target folder."),
     ),
 ):
     typer.echo(f"Target folder: {target_folder}")
@@ -138,14 +136,16 @@ def build(
         image_types = ["*.png", "*.jpg", "*.jpeg", "*.eps", "*.gif", "*.bmp"]
         image_files = []
         for im_type in image_types:
-            image_files.extend(glob.glob(f"{content_path}/**/{im_type}", recursive=True))
+            image_files.extend(
+                glob.glob(f"{content_path}/**/{im_type}", recursive=True)
+            )
         if len(image_files) > 0:
             typer.echo(f"Found {len(image_files)} image assets")
             for im_file_path in image_files:
                 src_path, filename = os.path.split(im_file_path)
                 internal_src_path = Path(src_path).relative_to(content_path)
                 os.makedirs(target_folder / internal_src_path, exist_ok=True)
-                dest = target_folder / internal_src_path / filename;
+                dest = target_folder / internal_src_path / filename
                 copyfile(im_file_path, dest)
                 typer.echo(f"Copied {filename} to {dest}")
         else:
