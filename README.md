@@ -152,28 +152,30 @@ curvenote_template build --help
 Usage: curvenote_template build [OPTIONS] TARGET_FOLDER CONTENT_PATH
                                 [TEMPLATE_PATH]
 Arguments:
-  TARGET_FOLDER    Local folder in which to construct the Latex assets. If
-                   TARGET exists itand all files will be removed and a new
-                   empty folder structure created  [required]
-  CONTENT_PATH     Path to a folder with containing content to render. Folder
-                   shoud contain the following files:   - main.tex   -
-                   main.bib   - data.yaml Along with any additional graphics
-                   assets  [required]
-  [TEMPLATE_PATH]  Path to a Curvenote compatible LaTeX template folder. This
-                   is intended for use with local Curvenote templates or in
-                   template development.Omitting this option will use the
-                   built in template.
+  CONTENT_PATH  Path to a folder with containing data and contentto render.
+                The folder should contain the following files:data.yml,
+                main.tex, main.bib - along with any additional graphics assets
+                [required]
+  OUTPUT_PATH   Path to a folder in which to construct the Latex assets. If
+                OUTPUT_PATH exists itand all files will be removed and a new
+                empty folder created  [required]
+
 Options:
-  --lipsum / --no-lipsum    If specified will patch the document with
-                            '\usepackage{lipsum}'.For use in template testing
-                            where `example/content.tex` uses the lipsum
-                            package.  [default: no-lipsum]
-  --strict / --no-strict    If true, then missing required tagged content or
-                            options will halt the process.  [default: no-
-                            strict]
-  --no-copy / --no-no-copy  If true, then image assets will not be copied into
-                            the target folder.  [default: no-no-copy]
-  --help                    Show this message and exit.
+  --template-path DIRECTORY  Path to a Curvenote compatible LaTeX template
+                             folder.This is intended for use with local
+                             Curvenote templates or in template
+                             development.Omitting this option will use the
+                             built in template.
+  --lipsum / --no-lipsum     If specified will patch the document with
+                             '\usepackage{lipsum}'.For use in template testing
+                             where `example/content.tex` uses the lipsum
+                             package.  [default: no-lipsum]
+  --strict / --no-strict     If true, then missing required tagged content or
+                             options will halt the process.  [default: no-
+                             strict]
+  --no-copy / --no-no-copy   If true, then image assets will not be copied
+                             into the target folder.  [default: no-no-copy]
+  --help                     Show this message and exit.
 ```
 
 When exporting LaTeX from Curvenote's API custom environments and commands are included by default. These require certain packages to be loaded and definitions to be included in the final document. `build` will include these definition files and expect certain structure to be present in the `DocModel` when rendering.

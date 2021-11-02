@@ -11,31 +11,28 @@ from .. import DocModel, LatexBuilder, TemplateLoader
 
 
 def build(
-    target_folder: Path = typer.Argument(
-        ...,
-        help=(
-            "Local folder in which to construct the Latex assets. If TARGET exists it"
-            "and all files will be removed and a new empty folder structure created"
-        ),
-        resolve_path=True,
-        dir_okay=True,
-        file_okay=False,
-    ),
     content_path: Path = typer.Argument(
         ...,
         help=(
-            "Path to a folder with containing content to render. Folder shoud contain the following files:\n"
-            "  - main.tex\n"
-            "  - main.bib\n"
-            "  - data.yaml\n"
-            "Along with any additional graphics assets"
+            "Path to a folder with containing data and contentto render. The folder should contain the following files:"
+            "data.yml, main.tex, main.bib - along with any additional graphics assets"
         ),
         exists=True,
         dir_okay=True,
         file_okay=False,
         resolve_path=True,
     ),
-    template_path: Path = typer.Argument(
+    output_path: Path = typer.Argument(
+        ...,
+        help=(
+            "Path to a folder in which to construct the Latex assets. If OUTPUT_PATH exists it"
+            "and all files will be removed and a new empty folder created"
+        ),
+        resolve_path=True,
+        dir_okay=True,
+        file_okay=False,
+    ),
+    template_path: Path = typer.Option(
         None,
         help=(
             "Path to a Curvenote compatible LaTeX template folder."
@@ -65,7 +62,7 @@ def build(
         help=("If true, then image assets will not be copied into the target folder."),
     ),
 ):
-    typer.echo(f"Target folder: {target_folder}")
+    typer.echo(f"Target folder: {output_path}")
 
     typer.echo(f"Content path: {content_path}")
     content_file = Path(content_path, "main.tex")
@@ -114,22 +111,22 @@ def build(
     if lipsum:
         docmodel["lipsum"] = True
 
-    loader = TemplateLoader(str(target_folder))
+    loader = TemplateLoader(str(output_path))
     if template_path:
         template_options, renderer = loader.initialise_from_path(str(template_path))
     else:
         template_options, renderer = loader.initialise_with_builtin_template()
     typer.echo("Template loaded")
 
-    builder = LatexBuilder(template_options, renderer, str(target_folder))
+    builder = LatexBuilder(template_options, renderer, str(output_path))
     builder.build(DocModel(docmodel), [content], bibtex=None, raise_if_invalid=strict)
 
     if bib_file.exists():
-        copyfile(bib_file, os.path.join(str(target_folder), "main.bib"))
+        copyfile(bib_file, os.path.join(str(output_path), "main.bib"))
 
     typer.echo("Checking content_path for image assets")
     typer.echo(f"Content Path: {content_path}")
-    typer.echo(f"Target Folder: {target_folder}")
+    typer.echo(f"Target Folder: {output_path}")
     if no_copy:
         typer.echo("--no-copy option is set - not copying image assets")
     else:
@@ -144,8 +141,8 @@ def build(
             for im_file_path in image_files:
                 src_path, filename = os.path.split(im_file_path)
                 internal_src_path = Path(src_path).relative_to(content_path)
-                os.makedirs(target_folder / internal_src_path, exist_ok=True)
-                dest = target_folder / internal_src_path / filename
+                os.makedirs(output_path / internal_src_path, exist_ok=True)
+                dest = output_path / internal_src_path / filename
                 copyfile(im_file_path, dest)
                 typer.echo(f"Copied {filename} to {dest}")
         else:
