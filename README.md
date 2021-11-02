@@ -166,15 +166,19 @@ Options:
                              Curvenote templates or in template
                              development.Omitting this option will use the
                              built in template.
-  --lipsum / --no-lipsum     If specified will patch the document with
-                             '\usepackage{lipsum}'.For use in template testing
-                             where `example/content.tex` uses the lipsum
+  --template-name TEXT       Name of a Curvenote template available from the
+                             public Curvenote API. (e.g. 'default').
+                             Specifying template-path will override this
+                             option if both are provided.
+  --lipsum / --no-lipsum     If lipsum, will patch the document with
+                             '\usepackage{lipsum}'. Useful when testing
+                             templates, where `content.tex` uses the lipsum
                              package.  [default: no-lipsum]
-  --strict / --no-strict     If true, then missing required tagged content or
-                             options will halt the process.  [default: no-
+  --strict / --no-strict     If strict, then missing required tagged content
+                             or options will halt the process.  [default: no-
                              strict]
-  --no-copy / --no-no-copy   If true, then image assets will not be copied
-                             into the target folder.  [default: no-no-copy]
+  --copy / --no-copy         Should image assets will be copied into the
+                             target folder?  [default: copy]
   --help                     Show this message and exit.
 ```
 

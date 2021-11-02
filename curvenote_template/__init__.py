@@ -4,4 +4,5 @@ from .LatexBuilder import LatexBuilder
 from .TemplateLoader import TemplateLoader
 from .TemplateOptions import TemplateOptions
 from .TemplateRenderer import TemplateRenderer
+from .PublicTemplateLoader import PublicTemplateLoader
 from .version import __version__
