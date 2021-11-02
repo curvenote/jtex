@@ -110,31 +110,31 @@ The following commands are available on the cli.
 
 #### build-lite
 
-`build-lite` is an unopinionated rendering command which as in the example above will allow you to render any template given content and a DocModel.
+`build-lite` is an un-opinionated rendering command which as in the example above will allow you to render any template given content and a DocModel.
 
 ```
 curvenote_template build-lite --help
+Usage: curvenote_template build-lite [OPTIONS] DATA_YML TEMPLATE_TEX
+                                     OUTPUT_FOLDER
 
-Usage: curvenote_template build-lite [OPTIONS] TARGET DOCMODEL_FILE
-                                     CONTENT_FILE TEMPLATE_FILE
 Arguments:
-  TARGET         Name of a local file to write the rendered content to. If
-                 TARGET exists it will be replaced.  [required]
-  DOCMODEL_FILE  Path to a YAML file containing the DocModel (a free-form
+  DATA_YML       Path to a YAML file containing the DocModel (a free-form
                  dict) required to render the template.  [required]
-  CONTENT_FILE   Path to a file containing the main content to render
-                 [required]
-  TEMPLATE_FILE  Path to a file with a compatible LaTeX template e.g.
+  TEMPLATE_TEX   Path to a file with a compatible LaTeX template e.g.
                  mytemplate.tex.The template should align with the data
                  structure given by the DocModel  [required]
+  OUTPUT_TEX     Name of a local file to write the rendered content to. If
+                 OUTPUT exists it will be replaced.  [required]
 
 Options:
-  --bib-file FILE         Path to an optional bib file.This will be copied as-
+  --content FILE          Path to a file containing the content to render in
+                          the [-CONTENT-] variable  [required]
+  --bib FILE              Path to an optional bib file.This will be copied as-
                           is into the target folder.
   --lipsum / --no-lipsum  If specified will patch the document with
-                          '\usepackage{lipsum}'.For use in template testing
-                          where `example/content.tex` uses the lipsum package.
-                          [default: no-lipsum]
+                          '\usepackage{lipsum}'.Usefull in testing where
+                          `content.tex` or `temaplte.tex` uses the lipsum
+                          package.  [default: no-lipsum]
   --help                  Show this message and exit.
 ```
 

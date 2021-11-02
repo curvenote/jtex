@@ -23,9 +23,8 @@ app = typer.Typer()
 app.command(help=("Validate a Curvenote LaTeX Template"))(validate)
 app.command(
     help=(
-        "Build a LaTeX document based on a free-form template, accompanying docmodel"
-        "data structure and content. This can be used for general template rendering independent of"
-        "Curvenote's prescriptive template structure."
+        "Build a LaTeX document based on a free-form template, accompanying data structure and optional 'body' content. "
+        "This can be used for general template rendering independently from Curvenote's prescriptive template structure. "
         "To build based on (and to develop/test) Curvenote templates use `build`."
     )
 )(build_lite)
