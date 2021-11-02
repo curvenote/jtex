@@ -49,3 +49,25 @@ def test_cli_build():
             assert actual_lines[n] == expected_lines[n]
 
         assert expected == actual
+
+def test_cli_build_from_api():
+    dir, _ = os.path.split(os.path.realpath(__file__))
+
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        CLI_CMD = (
+            f"curvenote_template build "
+            f"{os.path.join(dir, 'data', 'cn')} "
+            f"{tmp_dir} "
+            "--template-name default"
+        )
+        ret_val = subprocess.run(CLI_CMD, shell=True)
+        assert ret_val.returncode == 0
+        assert os.path.exists(os.path.join(tmp_dir, "main.tex"))
+
+        with open(os.path.join(tmp_dir, "main.tex"), "r") as outfile:
+            actual = outfile.read()
+
+        assert "\\title{Test Document}" in actual
+        assert "curvenote_default" in actual
+        assert "Lorem Abstractium" in actual
+        assert "Lorem ipsum" in actual

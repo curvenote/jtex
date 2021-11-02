@@ -7,7 +7,7 @@ from shutil import copyfile
 import typer
 import yaml
 
-from .. import DocModel, LatexBuilder, TemplateLoader
+from .. import DocModel, LatexBuilder, TemplateLoader, PublicTemplateLoader
 
 
 def build(
@@ -44,22 +44,29 @@ def build(
         file_okay=False,
         resolve_path=True,
     ),
+    template_name: str = typer.Option(
+        None,
+        help=(
+            "Name of a Curvenote template available from the public Curvenote API. (e.g. 'default'). "
+            "Specifying template-path will override this option if both are provided."
+        ),
+    ),
     lipsum: bool = typer.Option(
         False,
         help=(
-            "If specified will patch the document with '\\usepackage{lipsum}'."
-            "For use in template testing where `example/content.tex` uses the lipsum package."
+            "If lipsum, will patch the document with '\\usepackage{lipsum}'. "
+            "Useful when testing templates, where `content.tex` uses the lipsum package."
         ),
     ),
     strict: bool = typer.Option(
         False,
         help=(
-            "If true, then missing required tagged content or options will halt the process."
+            "If strict, then missing required tagged content or options will halt the process."
         ),
     ),
-    no_copy: bool = typer.Option(
-        False,
-        help=("If true, then image assets will not be copied into the target folder."),
+    copy: bool = typer.Option(
+        True,
+        help=("Should image assets will be copied into the target folder?"),
     ),
 ):
     typer.echo(f"Target folder: {output_path}")
@@ -84,6 +91,8 @@ def build(
 
     if template_path:
         typer.echo(f"Using template at: {template_path}")
+    elif template_name:
+        typer.echo(f"Using template {template_name} from the Curvenote API")
     else:
         typer.echo("Using built in template")
 
@@ -111,10 +120,15 @@ def build(
     if lipsum:
         docmodel["lipsum"] = True
 
-    loader = TemplateLoader(str(output_path))
+
     if template_path:
+        loader = TemplateLoader(str(output_path))
         template_options, renderer = loader.initialise_from_path(str(template_path))
+    elif template_name:
+        loader = PublicTemplateLoader(str(output_path))
+        template_options, renderer = loader.initialise_from_template_api(template_name)
     else:
+        loader = TemplateLoader(str(output_path))
         template_options, renderer = loader.initialise_with_builtin_template()
     typer.echo("Template loaded")
 
@@ -127,7 +141,7 @@ def build(
     typer.echo("Checking content_path for image assets")
     typer.echo(f"Content Path: {content_path}")
     typer.echo(f"Target Folder: {output_path}")
-    if no_copy:
+    if not copy:
         typer.echo("--no-copy option is set - not copying image assets")
     else:
         image_types = ["*.png", "*.jpg", "*.jpeg", "*.eps", "*.gif", "*.bmp"]
