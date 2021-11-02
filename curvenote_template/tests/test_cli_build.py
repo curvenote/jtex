@@ -8,9 +8,10 @@ def test_cli_build():
 
     with tempfile.TemporaryDirectory() as tmp_dir:
         CLI_CMD = (
-            f"curvenote_template build {tmp_dir} "
+            f"curvenote_template build "
             f"{os.path.join(dir, 'data', 'cn')} "
-            f"{os.path.join(dir, 'data', 'cn', 'template')}"
+            f"{tmp_dir} "
+            f"--template-path {os.path.join(dir, 'data', 'cn', 'template')}"
         )
         ret_val = subprocess.run(CLI_CMD, shell=True)
         assert ret_val.returncode == 0

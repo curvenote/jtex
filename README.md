@@ -110,31 +110,31 @@ The following commands are available on the cli.
 
 #### build-lite
 
-`build-lite` is an unopinionated rendering command which as in the example above will allow you to render any template given content and a DocModel.
+`build-lite` is an un-opinionated rendering command which as in the example above will allow you to render any template given content and a DocModel.
 
 ```
 curvenote_template build-lite --help
+Usage: curvenote_template build-lite [OPTIONS] DATA_YML TEMPLATE_TEX
+                                     OUTPUT_FOLDER
 
-Usage: curvenote_template build-lite [OPTIONS] TARGET DOCMODEL_FILE
-                                     CONTENT_FILE TEMPLATE_FILE
 Arguments:
-  TARGET         Name of a local file to write the rendered content to. If
-                 TARGET exists it will be replaced.  [required]
-  DOCMODEL_FILE  Path to a YAML file containing the DocModel (a free-form
+  DATA_YML       Path to a YAML file containing the DocModel (a free-form
                  dict) required to render the template.  [required]
-  CONTENT_FILE   Path to a file containing the main content to render
-                 [required]
-  TEMPLATE_FILE  Path to a file with a compatible LaTeX template e.g.
+  TEMPLATE_TEX   Path to a file with a compatible LaTeX template e.g.
                  mytemplate.tex.The template should align with the data
                  structure given by the DocModel  [required]
+  OUTPUT_TEX     Name of a local file to write the rendered content to. If
+                 OUTPUT exists it will be replaced.  [required]
 
 Options:
-  --bib-file FILE         Path to an optional bib file.This will be copied as-
+  --content FILE          Path to a file containing the content to render in
+                          the [-CONTENT-] variable  [required]
+  --bib FILE              Path to an optional bib file.This will be copied as-
                           is into the target folder.
   --lipsum / --no-lipsum  If specified will patch the document with
-                          '\usepackage{lipsum}'.For use in template testing
-                          where `example/content.tex` uses the lipsum package.
-                          [default: no-lipsum]
+                          '\usepackage{lipsum}'.Usefull in testing where
+                          `content.tex` or `temaplte.tex` uses the lipsum
+                          package.  [default: no-lipsum]
   --help                  Show this message and exit.
 ```
 
@@ -152,28 +152,30 @@ curvenote_template build --help
 Usage: curvenote_template build [OPTIONS] TARGET_FOLDER CONTENT_PATH
                                 [TEMPLATE_PATH]
 Arguments:
-  TARGET_FOLDER    Local folder in which to construct the Latex assets. If
-                   TARGET exists itand all files will be removed and a new
-                   empty folder structure created  [required]
-  CONTENT_PATH     Path to a folder with containing content to render. Folder
-                   shoud contain the following files:   - main.tex   -
-                   main.bib   - data.yaml Along with any additional graphics
-                   assets  [required]
-  [TEMPLATE_PATH]  Path to a Curvenote compatible LaTeX template folder. This
-                   is intended for use with local Curvenote templates or in
-                   template development.Omitting this option will use the
-                   built in template.
+  CONTENT_PATH  Path to a folder with containing data and contentto render.
+                The folder should contain the following files:data.yml,
+                main.tex, main.bib - along with any additional graphics assets
+                [required]
+  OUTPUT_PATH   Path to a folder in which to construct the Latex assets. If
+                OUTPUT_PATH exists itand all files will be removed and a new
+                empty folder created  [required]
+
 Options:
-  --lipsum / --no-lipsum    If specified will patch the document with
-                            '\usepackage{lipsum}'.For use in template testing
-                            where `example/content.tex` uses the lipsum
-                            package.  [default: no-lipsum]
-  --strict / --no-strict    If true, then missing required tagged content or
-                            options will halt the process.  [default: no-
-                            strict]
-  --no-copy / --no-no-copy  If true, then image assets will not be copied into
-                            the target folder.  [default: no-no-copy]
-  --help                    Show this message and exit.
+  --template-path DIRECTORY  Path to a Curvenote compatible LaTeX template
+                             folder.This is intended for use with local
+                             Curvenote templates or in template
+                             development.Omitting this option will use the
+                             built in template.
+  --lipsum / --no-lipsum     If specified will patch the document with
+                             '\usepackage{lipsum}'.For use in template testing
+                             where `example/content.tex` uses the lipsum
+                             package.  [default: no-lipsum]
+  --strict / --no-strict     If true, then missing required tagged content or
+                             options will halt the process.  [default: no-
+                             strict]
+  --no-copy / --no-no-copy   If true, then image assets will not be copied
+                             into the target folder.  [default: no-no-copy]
+  --help                     Show this message and exit.
 ```
 
 When exporting LaTeX from Curvenote's API custom environments and commands are included by default. These require certain packages to be loaded and definitions to be included in the final document. `build` will include these definition files and expect certain structure to be present in the `DocModel` when rendering.
