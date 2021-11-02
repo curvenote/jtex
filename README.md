@@ -114,8 +114,8 @@ The following commands are available on the cli.
 
 ```
 curvenote_template build-lite --help
-Usage: curvenote_template build-lite [OPTIONS] DATA_YML TEMPLATE_TEX
-                                     OUTPUT_FOLDER
+
+Usage: curvenote_template build-lite [OPTIONS] DATA_YML TEMPLATE_TEX OUTPUT_TEX
 
 Arguments:
   DATA_YML       Path to a YAML file containing the DocModel (a free-form
@@ -149,8 +149,8 @@ As you build your template, you can decide on the structure of the data in this 
 ```
 curvenote_template build --help
 
-Usage: curvenote_template build [OPTIONS] TARGET_FOLDER CONTENT_PATH
-                                [TEMPLATE_PATH]
+Usage: curvenote_template build [OPTIONS] CONTENT_PATH OUTPUT_PATH
+
 Arguments:
   CONTENT_PATH  Path to a folder with containing data and contentto render.
                 The folder should contain the following files:data.yml,
