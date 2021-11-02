@@ -6,7 +6,6 @@ docs:
 clean:
 	rm -rf build
 	rm -rf dist
-	rm README.rst
 
 lint:
 	pylint curvenote_template
