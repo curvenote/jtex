@@ -60,6 +60,12 @@ schema;config:
               type: str
             required:
               type: bool
+            chars:
+              map:
+                min:
+                  type: number
+                max:
+                  type: number
             words:
               map:
                 min:
