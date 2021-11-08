@@ -13,7 +13,7 @@ To get started create a virtual environment and install dev dependencies. This w
 Linting rules are included in the repo and you should run `black` before pushing changes to a PR.
 
 ```
-  black curvenote_template
+  black jtex
 ```
 
 ## Running the tests

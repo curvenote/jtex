@@ -5,10 +5,10 @@ import unittest
 import pkg_resources
 import pytest
 
-from curvenote_template.TemplateOptions import TemplateOptions
+from jtex.TemplateOptions import TemplateOptions
 
 DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename(
-    "curvenote_template", "builtin_template"
+    "jtex", "builtin_template"
 )
 
 

@@ -24,7 +24,7 @@ from .utils import just_log_errors, log_and_raise_errors
 
 
 def get_def_file_path(filename: str):
-    def_path = pkg_resources.resource_filename("curvenote_template", "defs")
+    def_path = pkg_resources.resource_filename("jtex", "defs")
     return os.path.join(def_path, filename)
 
 

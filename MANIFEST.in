@@ -1,3 +1,3 @@
-include curvenote_template/schema/*
-include curvenote_template/defs/*
-include curvenote_template/builtin_template/*
+include jtex/schema/*
+include jtex/defs/*
+include jtex/builtin_template/*

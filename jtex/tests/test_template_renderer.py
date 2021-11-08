@@ -5,7 +5,7 @@ import pytest
 from dateutil import parser
 from jinja2.loaders import PackageLoader
 
-from curvenote_template.TemplateRenderer import TemplateRenderer
+from jtex.TemplateRenderer import TemplateRenderer
 
 
 def test_not_initialized_on_construction():
@@ -16,7 +16,7 @@ def test_not_initialized_on_construction():
 @pytest.fixture(name="renderer")
 def _renderer():
     renderer = TemplateRenderer()
-    renderer.use_loader(PackageLoader("curvenote_template", "builtin_template"))
+    renderer.use_loader(PackageLoader("jtex", "builtin_template"))
     return renderer
 
 

@@ -14,7 +14,7 @@ def build(
     content_path: Path = typer.Argument(
         ...,
         help=(
-            "Path to a folder with containing data and contentto render. The folder should contain the following files:"
+            "Path to a folder with containing data and content to render. The folder should contain the following files:"
             "data.yml, main.tex, main.bib - along with any additional graphics assets"
         ),
         exists=True,

@@ -6,7 +6,7 @@ from zipfile import ZipFile
 
 import typer
 import pkg_resources
-from curvenote_template import TemplateLoader, TemplateOptions, TemplateRenderer
+from jtex import TemplateLoader, TemplateOptions, TemplateRenderer
 import requests
 from .utils import download
 

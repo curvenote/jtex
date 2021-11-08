@@ -6,9 +6,9 @@ import pkg_resources
 import yaml
 from pykwalify.core import Core
 
-from curvenote_template.TexFormat import TexFormat
+from jtex.TexFormat import TexFormat
 
-SCHEMA_PATH = pkg_resources.resource_filename("curvenote_template", "schema")
+SCHEMA_PATH = pkg_resources.resource_filename("jtex", "schema")
 
 
 class TemplateOptions:

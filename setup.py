@@ -2,14 +2,14 @@ import os
 import sys
 import setuptools
 
-sys.path[0:0] = ['curvenote_template']
+sys.path[0:0] = ['jtex']
 from version import __version__
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="curvenote_template",
+    name="jtex",
     description="Jinja-style templating for LaTeX documents by Curvenote",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -25,7 +25,7 @@ setuptools.setup(
     ],
     entry_points='''
         [console_scripts]
-        curvenote_template=curvenote_template.__main__:main
+        jtex=jtex.__main__:main
     ''',
     url="http://curvenote.com",
     version=__version__,

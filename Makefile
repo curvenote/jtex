@@ -8,14 +8,13 @@ clean:
 	rm -rf dist
 
 lint:
-	pylint curvenote_template
+	pylint jtek
 
 format:
-	isort curvenote_template
-	black curvenote_template
+	isort jtek
+	black jtek
 
 build:
-	m2r README.md --overwrite
 	python -m build
 
 deploy-check:

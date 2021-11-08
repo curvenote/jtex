@@ -1,8 +1,8 @@
 <img src="https://curvenote.dev/images/logo.png" width="200" />
 
-# Curvenote Template
+# JTEX
 
-Curvenote Template is a command line tool (cli) for rendering LaTeX documents from jinja-style templates. This package uses [jinja2](https://pypi.org/project/Jinja2/) as the template engine with a modified enviroment and syntax that plays well with LaTeX's markup.
+JTEX is a command line tool (CLI) for rendering LaTeX documents from jinja-style templates. This package uses [Jinja2](https://pypi.org/project/Jinja2/) as the template engine with a modified environment and syntax that plays well with LaTeX's markup.
 
 This allows you to build LaTeX documents driven by content, data and a template. We built this package while developing our template based PDF/LaTeX export system for [Curvenote](https://curvenote.com), where it is used to create documents from the templates on the [Curvenote Community Template Repo](https://github.com/curvenote/templates).
 
@@ -11,16 +11,14 @@ This allows you to build LaTeX documents driven by content, data and a template.
 Install the package into your virtual environment using pip:
 
 ```
-  pip install curvenote-template
+  pip install jtex
 ```
 
 and confirm correct installation by typing:
 
 ```
-  curvenote_template --version
+  jtex --version
 ```
-
-> Note: The cli command name uses and underscore in place of a hypen
 
 ## An example
 
@@ -60,7 +58,7 @@ The End!
 We can render a LaTeX document with the following command:
 
 ```
-  curvenote_template build-lite output.tex data.yml content.tex template.tex
+  jtex build-lite output.tex data.yml content.tex template.tex
 ```
 
 To produce a `.tex` file with the following contents:
@@ -99,7 +97,7 @@ The `build-lite` command shown above is not opinionated and can be used to rende
 Get help from the command line tool at any time using the `--help` option.
 
 ```
-  curvenote_template --help
+  jtex --help
 ```
 
 > Note: the CLI uses `typer` which provides shell completion option as standard. These are list in help messages and installation is recommended, but these commands are not central to use of the tool.
@@ -113,9 +111,9 @@ The following commands are available on the cli.
 `build-lite` is an un-opinionated rendering command which as in the example above will allow you to render any template given content and a DocModel.
 
 ```
-curvenote_template build-lite --help
+jtex build-lite --help
 
-Usage: curvenote_template build-lite [OPTIONS] DATA_YML TEMPLATE_TEX OUTPUT_TEX
+Usage: jtex build-lite [OPTIONS] DATA_YML TEMPLATE_TEX OUTPUT_TEX
 
 Arguments:
   DATA_YML       Path to a YAML file containing the DocModel (a free-form
@@ -147,9 +145,9 @@ As you build your template, you can decide on the structure of the data in this 
 `build` is an opinionated rendering command intended for use with Curvenote content and templates specifically.
 
 ```
-curvenote_template build --help
+jtex build --help
 
-Usage: curvenote_template build [OPTIONS] CONTENT_PATH OUTPUT_PATH
+Usage: jtex build [OPTIONS] CONTENT_PATH OUTPUT_PATH
 
 Arguments:
   CONTENT_PATH  Path to a folder with containing data and contentto render.
@@ -193,9 +191,9 @@ As `build` is not generally applicable outside of Curvenote templates, we'll not
 `validate` is a dry run command which will validate a Curvenote template. This is very simple validation at the moment and we expect this to be extended.
 
 ```
-curvenote_template validate --help
+jtex validate --help
 
-Usage: curvenote_template validate [OPTIONS] TEMPLATE_PATH
+Usage: jtex validate [OPTIONS] TEMPLATE_PATH
 
 Arguments:
   TEMPLATE_PATH  Local folder containing the Curvenote compatible template to

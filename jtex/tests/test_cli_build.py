@@ -8,7 +8,7 @@ def test_cli_build():
 
     with tempfile.TemporaryDirectory() as tmp_dir:
         CLI_CMD = (
-            f"curvenote_template build "
+            f"jtex build "
             f"{os.path.join(dir, 'data', 'cn')} "
             f"{tmp_dir} "
             f"--template-path {os.path.join(dir, 'data', 'cn', 'template')}"
@@ -55,7 +55,7 @@ def test_cli_build_from_api():
 
     with tempfile.TemporaryDirectory() as tmp_dir:
         CLI_CMD = (
-            f"curvenote_template build "
+            f"jtex build "
             f"{os.path.join(dir, 'data', 'cn')} "
             f"{tmp_dir} "
             "--template-name default"

@@ -1,6 +1,6 @@
 import pytest
 
-from curvenote_template.options.NatbibSchemaOption import citep_transform
+from jtex.options.NatbibSchemaOption import citep_transform
 
 
 @pytest.fixture(

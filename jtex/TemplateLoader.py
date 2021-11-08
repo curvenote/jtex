@@ -13,7 +13,7 @@ from .TemplateOptions import TemplateOptions
 from .TemplateRenderer import TemplateRenderer
 
 DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename(
-    "curvenote_template", "builtin_template"
+    "jtex", "builtin_template"
 )
 
 
@@ -78,7 +78,7 @@ class TemplateLoader:
         self._template_name = "builtin"
         renderer = TemplateRenderer()
         renderer.use_loader(
-            PackageLoader("curvenote_template", os.path.join("builtin_template"))
+            PackageLoader("jtex", os.path.join("builtin_template"))
         )
 
         return TemplateOptions(DEFAULT_TEMPLATE_PATH), renderer
