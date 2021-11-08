@@ -119,7 +119,7 @@ Arguments:
   DATA_YML       Path to a YAML file containing the DocModel (a free-form
                  dict) required to render the template.  [required]
   TEMPLATE_TEX   Path to a file with a compatible LaTeX template e.g.
-                 mytemplate.tex.The template should align with the data
+                 mytemplate.tex. The template should align with the data
                  structure given by the DocModel  [required]
   OUTPUT_TEX     Name of a local file to write the rendered content to. If
                  OUTPUT exists it will be replaced.  [required]
@@ -127,10 +127,10 @@ Arguments:
 Options:
   --content FILE          Path to a file containing the content to render in
                           the [-CONTENT-] variable  [required]
-  --bib FILE              Path to an optional bib file.This will be copied as-
+  --bib FILE              Path to an optional bib file. This will be copied as-
                           is into the target folder.
   --lipsum / --no-lipsum  If specified will patch the document with
-                          '\usepackage{lipsum}'.Usefull in testing where
+                          '\usepackage{lipsum}'. Useful in testing where
                           `content.tex` or `temaplte.tex` uses the lipsum
                           package.  [default: no-lipsum]
   --help                  Show this message and exit.
@@ -150,19 +150,19 @@ jtex build --help
 Usage: jtex build [OPTIONS] CONTENT_PATH OUTPUT_PATH
 
 Arguments:
-  CONTENT_PATH  Path to a folder with containing data and contentto render.
-                The folder should contain the following files:data.yml,
+  CONTENT_PATH  Path to a folder with containing data and content to render.
+                The folder should contain the following files: data.yml,
                 main.tex, main.bib - along with any additional graphics assets
                 [required]
   OUTPUT_PATH   Path to a folder in which to construct the Latex assets. If
-                OUTPUT_PATH exists itand all files will be removed and a new
+                OUTPUT_PATH exists it and all files will be removed and a new
                 empty folder created  [required]
 
 Options:
   --template-path DIRECTORY  Path to a Curvenote compatible LaTeX template
-                             folder.This is intended for use with local
+                             folder. This is intended for use with local
                              Curvenote templates or in template
-                             development.Omitting this option will use the
+                             development. Omitting this option will use the
                              built in template.
   --template-name TEXT       Name of a Curvenote template available from the
                              public Curvenote API. (e.g. 'default').
@@ -273,7 +273,7 @@ author: Ana Cosmo
 ...
 ```
 
-You can add comments to your template, and these will be removed at render time. Just in case, the comments are also valid LaTeX comments so should not affect your build even i one did leak through
+You can add comments to your template, and these will be removed at render time. Just in case, the comments are also valid LaTeX comments so should not affect your build even if one did leak through
 
 ```
   % template.tex
@@ -314,7 +314,7 @@ tags: [-tags|join(', ')-]
 
 `[-CONTENT-]` is a special variable that will expand to the entire contents of `content.tex`
 
-We'll not go into more `jinja` features here, as they are covered in the [Jinja Template Designer Documentation](https://jinja.palletsprojects.com/en/3.0.x/templates/) -- simply replace the standard `jinja` syntax with our customized `syntax` and bear in mind the rules of LaTeX and constructing sophisicated templates is pretty straightforward with practice.
+We'll not go into more `jinja` features here, as they are covered in the [Jinja Template Designer Documentation](https://jinja.palletsprojects.com/en/3.0.x/templates/) -- simply replace the standard `jinja` syntax with our customized `syntax` and bear in mind the rules of LaTeX and constructing sophisticated templates is pretty straightforward with practice.
 
 ### Curvenote Templates
 
