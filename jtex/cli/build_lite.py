@@ -22,7 +22,7 @@ def build_lite(
     template_tex: Path = typer.Argument(
         ...,
         help=(
-            "Path to a file with a compatible LaTeX template e.g. mytemplate.tex."
+            "Path to a file with a compatible LaTeX template e.g. mytemplate.tex. "
             "The template should align with the data structure given by the DocModel"
         ),
         exists=True,
@@ -50,7 +50,7 @@ def build_lite(
     bib: Path = typer.Option(
         None,
         help=(
-            "Path to an optional bib file."
+            "Path to an optional bib file. "
             "This will be copied as-is into the target folder."
         ),
         exists=True,
@@ -61,8 +61,8 @@ def build_lite(
     lipsum: bool = typer.Option(
         False,
         help=(
-            "If specified will patch the document with '\\usepackage{lipsum}'."
-            "Usefull in testing where `content.tex` or `temaplte.tex` uses the lipsum package."
+            "If specified will patch the document with '\\usepackage{lipsum}'. "
+            "Useful in testing where `content.tex` or `temaplte.tex` uses the lipsum package."
         ),
     ),
 ):

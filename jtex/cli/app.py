@@ -30,8 +30,8 @@ app.command(
 )(build_lite)
 app.command(
     help=(
-        "Build a LaTeX document based on a Curvenote LaTeX Template, accompanying docmodel"
-        "data structure and content."
+        "Build a LaTeX document based on a Curvenote LaTeX Template, accompanying docmodel "
+        "data structure and content. "
         "Can be used to develop/test Curvenote templates."
     )
 )(build)
