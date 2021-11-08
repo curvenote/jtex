@@ -60,6 +60,8 @@ schema;config:
               type: str
             required:
               type: bool
+            plain:
+              type: bool
             chars:
               map:
                 min:
