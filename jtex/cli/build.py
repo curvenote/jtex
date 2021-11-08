@@ -14,7 +14,7 @@ def build(
     content_path: Path = typer.Argument(
         ...,
         help=(
-            "Path to a folder with containing data and content to render. The folder should contain the following files:"
+            "Path to a folder with containing data and content to render. The folder should contain the following files: "
             "data.yml, main.tex, main.bib - along with any additional graphics assets"
         ),
         exists=True,
@@ -25,7 +25,7 @@ def build(
     output_path: Path = typer.Argument(
         ...,
         help=(
-            "Path to a folder in which to construct the Latex assets. If OUTPUT_PATH exists it"
+            "Path to a folder in which to construct the Latex assets. If OUTPUT_PATH exists it "
             "and all files will be removed and a new empty folder created"
         ),
         resolve_path=True,
@@ -35,8 +35,8 @@ def build(
     template_path: Path = typer.Option(
         None,
         help=(
-            "Path to a Curvenote compatible LaTeX template folder."
-            "This is intended for use with local Curvenote templates or in template development."
+            "Path to a Curvenote compatible LaTeX template folder. "
+            "This is intended for use with local Curvenote templates or in template development. "
             "Omitting this option will use the built in template."
         ),
         exists=True,
