@@ -1,6 +1,6 @@
 import logging
 import os
-from typing import Any, Dict, Optional, Set, Union, cast
+from typing import Any, Dict, List, Optional, Set, Union, cast
 
 import pkg_resources
 import yaml
@@ -10,6 +10,16 @@ from jtex.TexFormat import TexFormat
 
 SCHEMA_PATH = pkg_resources.resource_filename("jtex", "schema")
 
+class Tag:
+    def __init__(self, id: str, plain: bool):
+        self.id = id
+        self.plain = plain
+
+    def __eq__(self, other):
+        return self.id == other.id
+
+    def __hash__(self):
+        return hash(self.id)
 
 class TemplateOptions:
     def __init__(self, template_location: str):
@@ -45,8 +55,12 @@ class TemplateOptions:
     def template_location(self):
         return self._template_location
 
-    def get_allowed_tags(self) -> Set[str]:
-        return set(map(lambda item: item["id"], self.tagged))
+    def get_allowed_tags(self) -> Set[Tag]:
+        tags = []
+        for tagged in self.tagged:
+            plain = tagged["plain"] if "plain" in tagged else False
+            tags.append(Tag(tagged["id"], plain))
+        return set(tags)
 
     def get(self, path: str, default: Any = None):
         """
@@ -95,11 +109,11 @@ class TemplateOptions:
         return self._parser.source["config"]["schema"]
 
     @property
-    def tagged(self) -> Dict:
+    def tagged(self) -> List:
         """
         Return the tagged section
         """
-        return cast(Dict, self.get("config.tagged", {}))
+        return cast(List, self.get("config.tagged", []))
 
     @property
     def config_options(self):

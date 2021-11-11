@@ -38,5 +38,6 @@ config:
         remember key points.
       words:
         max: 600
+      plain: true
 
   options: []
