@@ -37,7 +37,8 @@ setuptools.setup(
         "typer",
         "jinja2",
         "pykwalify",
-        "pyyaml"
+        "pyyaml",
+        "requests"
     ],
     python_requires=">=3.7",
 )
