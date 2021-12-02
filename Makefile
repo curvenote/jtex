@@ -26,5 +26,5 @@ deploy-check:
 deploy-test:
 	python -m twine upload --repository-url=https://test.pypi.org/legacy/ dist/*
 
-deploy:
+deploy: deploy-check
 	python -m twine upload dist/*
