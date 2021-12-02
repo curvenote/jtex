@@ -223,7 +223,7 @@ The cli uses a `jinja2` environment with the following modifications.
 | Statements   | `[# #]`    | `{% %}`         |
 | Expressions  | `[- -]`    | `{{ }}`         |
 | Comments     | `%# #%`    | `{# #}`         |
-| Line Comment | `%#`       | `##`            |
+| Line Comment | `%%`       | `##`            |
 
 A minimal LaTeX example illustrating these would be:
 

@@ -50,6 +50,13 @@ def test_syntax_block_var(renderer):
     assert output == "ABC0ABC1ABC2"
 
 
+def test_syntax_inline_comment(renderer):
+    T = r"just %% not this"
+
+    output = renderer.render_from_string(T, dict(x="y"))
+
+    assert output == "just"
+
 def test_syntax_comment(renderer):
     T = r"just %# not this #% this"
 
