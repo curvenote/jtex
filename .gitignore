@@ -12,3 +12,14 @@ test_tmp/
 dist/
 env/
 pip-wheel-metadata/
+
+
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.bbl
+*.blg
+*.synctex.gz
+*.out
+*.ignore
