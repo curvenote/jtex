@@ -17,6 +17,9 @@ format:
 build:
 	python -m build
 
+test:
+	pytest
+
 deploy-check:
 	python -m twine check dist/*
 
