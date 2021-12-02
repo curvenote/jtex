@@ -41,7 +41,9 @@ def build_lite(
     ),
     content: Path = typer.Option(
         None,
-        help=("Path to a file containing the content to render in the [-CONTENT-] variable"),
+        help=(
+            "Path to a file containing the content to render in the [-CONTENT-] variable"
+        ),
         exists=True,
         dir_okay=False,
         file_okay=True,
@@ -76,7 +78,7 @@ def build_lite(
         typer.echo(f"Adding lipsum package to final document")
 
     body_content = ""
-    if (content):
+    if content:
         try:
             with open(content) as cfile:
                 body_content = cfile.read()
@@ -107,7 +109,9 @@ def build_lite(
     if lipsum:
         docmodel["lipsum"] = True
 
-    rendered = renderer.render_from_string(template, dict(**docmodel, CONTENT=body_content))
+    rendered = renderer.render_from_string(
+        template, dict(**docmodel, CONTENT=body_content)
+    )
     typer.echo("Rendered")
 
     try:

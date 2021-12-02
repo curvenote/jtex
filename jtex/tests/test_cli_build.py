@@ -50,6 +50,7 @@ def test_cli_build():
 
         assert expected == actual
 
+
 def test_cli_build_from_api():
     dir, _ = os.path.split(os.path.realpath(__file__))
 

@@ -7,7 +7,7 @@ from shutil import copyfile
 import typer
 import yaml
 
-from .. import DocModel, LatexBuilder, TemplateLoader, PublicTemplateLoader
+from .. import DocModel, LatexBuilder, PublicTemplateLoader, TemplateLoader
 
 
 def build(
@@ -119,7 +119,6 @@ def build(
 
     if lipsum:
         docmodel["lipsum"] = True
-
 
     if template_path:
         loader = TemplateLoader(str(output_path))

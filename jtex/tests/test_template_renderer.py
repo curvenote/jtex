@@ -57,6 +57,7 @@ def test_syntax_inline_comment(renderer):
 
     assert output == "just"
 
+
 def test_syntax_comment(renderer):
     T = r"just %# not this #% this"
 

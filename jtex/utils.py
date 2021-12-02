@@ -1,4 +1,5 @@
 import logging
+
 import requests
 
 
@@ -38,6 +39,7 @@ def log_and_raise_errors(message_func):
         return inner
 
     return decorator
+
 
 def download(url, save_path, chunk_size=128):
     """

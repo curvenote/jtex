@@ -12,9 +12,7 @@ from jinja2.loaders import PackageLoader
 from .TemplateOptions import TemplateOptions
 from .TemplateRenderer import TemplateRenderer
 
-DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename(
-    "jtex", "builtin_template"
-)
+DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename("jtex", "builtin_template")
 
 
 class TemplateLoader:
@@ -77,9 +75,7 @@ class TemplateLoader:
 
         self._template_name = "builtin"
         renderer = TemplateRenderer()
-        renderer.use_loader(
-            PackageLoader("jtex", os.path.join("builtin_template"))
-        )
+        renderer.use_loader(PackageLoader("jtex", os.path.join("builtin_template")))
 
         return TemplateOptions(DEFAULT_TEMPLATE_PATH), renderer
 
