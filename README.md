@@ -218,11 +218,12 @@ The cli uses a `jinja2` environment with the following modifications.
 
 #### Syntax
 
-|             | customized | standard jinja2 |
-| ----------- | ---------- | --------------- |
-| Statements  | `[# #]`    | `{% %}`         |
-| Expressions | `[- -]`    | `{{ }}`         |
-| Comments    | `%# #%`    | `{# #}`         |
+|              | customized | standard jinja2 |
+| ------------ | ---------- | --------------- |
+| Statements   | `[# #]`    | `{% %}`         |
+| Expressions  | `[- -]`    | `{{ }}`         |
+| Comments     | `%# #%`    | `{# #}`         |
+| Line Comment | `%%`       | `##`            |
 
 A minimal LaTeX example illustrating these would be:
 
@@ -230,7 +231,7 @@ A minimal LaTeX example illustrating these would be:
 \documentclass{article}
 \begin{document}
 \section{Famous People}
-%# Print a list of famous people defined in the context dictionary #%
+%% Print a list of famous people defined in the context dictionary
 \begin{itemize}
 [# for person in famous_people #]
 \item [-person.name-], [-person.job-] [# if person.email #]([-person.email-])[# endif #]

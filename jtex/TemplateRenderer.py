@@ -38,6 +38,7 @@ class TemplateRenderer:
             block_end_string="#]",
             variable_start_string=r"[-",
             variable_end_string="-]",
+            line_comment_prefix=r"%%",
             comment_start_string=r"%#",
             comment_end_string="#%",
             trim_blocks=True,
