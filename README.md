@@ -231,7 +231,7 @@ A minimal LaTeX example illustrating these would be:
 \documentclass{article}
 \begin{document}
 \section{Famous People}
-%# Print a list of famous people defined in the context dictionary
+%% Print a list of famous people defined in the context dictionary
 \begin{itemize}
 [# for person in famous_people #]
 \item [-person.name-], [-person.job-] [# if person.email #]([-person.email-])[# endif #]
