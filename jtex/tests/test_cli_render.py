@@ -7,7 +7,7 @@ def test_cli_render():
     dir, _ = os.path.split(os.path.realpath(__file__))
 
     with tempfile.TemporaryDirectory() as tmp_dir:
-        tmp_dir = "test_tmp"
+
         CLI_CMD = (
             f"jtex render "
             f"{os.path.join(dir, 'data', 'cn', 'main.tex')} "

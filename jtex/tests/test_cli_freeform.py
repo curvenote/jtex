@@ -9,7 +9,7 @@ def test_cli_freeform():
 
     with tempfile.TemporaryDirectory() as tmp_dir:
         tmp_file = os.path.join(tmp_dir, next(tempfile._get_candidate_names()))
-        tmp_file = "test_tmp_ff/main.tex"
+
         CLI_CMD = (
             f"jtex freeform "
             f"{os.path.join(dir, 'data', 'lite', 'template.tex')} "
