@@ -1,7 +1,4 @@
-import os
-import tempfile
 import pytest
-import yaml
 
 from jtex.utils import parse_front_matter, stringify_front_matter
 

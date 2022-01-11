@@ -1,7 +1,4 @@
-import os
-import re
 import unittest
-
 import pkg_resources
 import pytest
 

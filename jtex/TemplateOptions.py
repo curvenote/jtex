@@ -1,12 +1,11 @@
 import logging
 import os
-from typing import Any, Dict, List, Optional, Set, Union, cast
+from typing import Any, Dict, List, Set, Union, cast
 
 import pkg_resources
-import yaml
 from pykwalify.core import Core
 
-from jtex.TexFormat import TexFormat
+from .TexFormat import TexFormat
 
 SCHEMA_PATH = pkg_resources.resource_filename("jtex", "schema")
 

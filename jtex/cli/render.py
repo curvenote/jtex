@@ -6,11 +6,13 @@ from typing import Dict
 
 import typer
 
-from jtex import DocModel, LatexBuilder, TemplateLoader, PublicTemplateLoader, utils
+from .. import DocModel, LatexBuilder, PublicTemplateLoader, TemplateLoader, utils
+
 
 def validate_document(docmodel: DocModel):
     # TODO
     return True
+
 
 def render(
     content_file: Path = typer.Argument(
@@ -75,15 +77,15 @@ def render(
     content_path = os.path.dirname(os.path.abspath(content_file))
     typer.echo(f"Content path {content_path}")
 
-    target_folder = os.path.abspath(docmodel.get('jtex.output.path', str, content_path))
-    if output_path is not None: # option overrides jtex setting
+    target_folder = os.path.abspath(docmodel.get("jtex.output.path", str, content_path))
+    if output_path is not None:  # option overrides jtex setting
         target_folder = str(output_path)
         os.makedirs(target_folder, exist_ok=True)
     typer.echo(f"Target output folder {target_folder}")
 
     # check for references and confirm bib file
     references = docmodel.get("jtex.input.references")
-    bib_file = ''
+    bib_file = ""
     if references is not None:
         bib_file = Path(content_path, references)
         if bib_file.exists():
@@ -93,7 +95,7 @@ def render(
             raise typer.Exit(code=1)
 
     # check for tagged content and load it
-    tagged_files = docmodel.get('jtex.input.tagged', Dict[str, str], {})
+    tagged_files = docmodel.get("jtex.input.tagged", Dict[str, str], {})
     tagged = {}
     missing_tagged_files = []
     for key, tagged_file in tagged_files.items():
@@ -101,21 +103,23 @@ def render(
         if not os.path.exists(tagged_file_path):
             missing_tagged_files.append((key, tagged_file_path))
             continue
-        with open(tagged_file_path, 'r') as f:
+        with open(tagged_file_path, "r") as f:
             tagged[key] = f.read()
 
     if len(missing_tagged_files) > 0:
-        typer.echo('Could not find the following tagged content files:')
-        _=[typer.echo(f"{k}: {v}") for k,v in missing_tagged_files]
+        typer.echo("Could not find the following tagged content files:")
+        _ = [typer.echo(f"{k}: {v}") for k, v in missing_tagged_files]
         typer.Exit(code=1)
 
-    template = docmodel.get('jtex.template')
+    template = docmodel.get("jtex.template")
     if template_path is not None:
         typer.echo(f"Using local template at: {template_path}")
         loader = TemplateLoader(str(target_folder))
         template_options, renderer = loader.initialise_from_path(str(template_path))
     elif template is not None:
-        typer.echo(f"Using template {docmodel.get('jtex.template')} from the Curvenote API")
+        typer.echo(
+            f"Using template {docmodel.get('jtex.template')} from the Curvenote API"
+        )
         loader = PublicTemplateLoader(str(target_folder))
         template_options, renderer = loader.initialise_from_template_api(template)
     else:
@@ -125,8 +129,13 @@ def render(
     typer.echo("Template loaded")
 
     builder = LatexBuilder(template_options, renderer, str(target_folder))
-    builder.build(docmodel,
-        [content], tagged, bibtex=None, raise_if_invalid=docmodel.get('jtex.strict', bool, False))
+    builder.build(
+        docmodel,
+        [content],
+        tagged,
+        bibtex=None,
+        raise_if_invalid=docmodel.get("jtex.strict", bool, False),
+    )
 
     if references is not None:
         copyfile(bib_file, os.path.join(str(target_folder), "main.bib"))

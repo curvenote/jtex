@@ -1,9 +1,8 @@
 import logging
-import requests
-import yaml
 from typing import Dict, Optional, Tuple
 
-from jtex.DocModel import DocModel
+import requests
+import yaml
 
 
 def just_log_errors(message_func):

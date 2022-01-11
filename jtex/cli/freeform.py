@@ -4,7 +4,7 @@ from shutil import copyfile
 
 import typer
 
-from jtex import DocModel, TemplateRenderer, utils
+from .. import DocModel, TemplateRenderer, utils
 
 
 def freeform(
@@ -21,9 +21,7 @@ def freeform(
     ),
     content_tex: Path = typer.Argument(
         ...,
-        help=(
-            "Path to a file containing the content to render and jtex front matter."
-        ),
+        help=("Path to a file containing the content to render and jtex front matter."),
         exists=True,
         dir_okay=False,
         file_okay=True,

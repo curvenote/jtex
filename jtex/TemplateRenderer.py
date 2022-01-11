@@ -62,7 +62,7 @@ class TemplateRenderer:
         """
         self.reset_environment(loader)
 
-    def render_from_string(self, template: str, data: Dict, content: str = ''):
+    def render_from_string(self, template: str, data: Dict, content: str = ""):
         """
         Render using the template specified in a string
         """

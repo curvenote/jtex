@@ -4,10 +4,12 @@ from re import template
 from typing import Dict, List, Tuple, cast
 from zipfile import ZipFile
 
-import typer
 import pkg_resources
-from jtex import TemplateLoader, TemplateOptions, TemplateRenderer
 import requests
+import typer
+
+from . import TemplateLoader, TemplateOptions, TemplateRenderer
+
 from .utils import download
 
 API_URL = "https://api.curvenote.com"

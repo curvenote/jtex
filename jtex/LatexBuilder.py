@@ -3,8 +3,8 @@ import os
 import shutil
 from typing import Any, Dict, List, NewType, Optional
 
-from jtex import DefBuilder, DocModel, TemplateOptions, TemplateRenderer
-from jtex.utils import log_and_raise_errors, stringify_front_matter
+from . import DefBuilder, DocModel, TemplateOptions, TemplateRenderer
+from .utils import log_and_raise_errors, stringify_front_matter
 
 logger = logging.getLogger()
 
@@ -25,12 +25,12 @@ class LatexBuilder:
             if "required" in opt and opt["required"]
         ]
         missing_options = [
-            r
-            for r in required_options
-            if data.get(f"jtex.options.{r}") is None
+            r for r in required_options if data.get(f"jtex.options.{r}") is None
         ]
         if len(missing_options) > 0:
-            logging.warn("Some REQUIRED user options are not provided: %s", missing_options)
+            logging.warn(
+                "Some REQUIRED user options are not provided: %s", missing_options
+            )
             if raise_if_invalid:
                 raise ValueError(
                     "Some REQUIRED user options are not provided: %s" % missing_options
@@ -41,7 +41,7 @@ class LatexBuilder:
         data: DocModel,
         content: List[str],
         tagged: Dict[str, str],
-        bibtex: Optional[str] = None, # TODO remove as we copy the file forwards?
+        bibtex: Optional[str] = None,  # TODO remove as we copy the file forwards?
         raise_if_invalid: bool = True,
     ):
         logging.info("Rendering template...")
@@ -55,13 +55,15 @@ class LatexBuilder:
             )
 
         # prep the data object to the shape expected  by templates
-        doc=data.to_dict()
-        doc.pop('jtex', None)
+        doc = data.to_dict()
+        doc.pop("jtex", None)
         data_to_render = dict(doc=doc)
-        data_to_render['tagged'] = tagged
-        data_to_render['options'] = data.get('jtex.options', Dict[str, Any], {})
+        data_to_render["tagged"] = tagged
+        data_to_render["options"] = data.get("jtex.options", Dict[str, Any], {})
 
-        rendered_content = [self.renderer.render(data=data_to_render, content=content[0])]
+        rendered_content = [
+            self.renderer.render(data=data_to_render, content=content[0])
+        ]
         self._write(data, rendered_content, bibtex)
 
     @log_and_raise_errors(lambda *args: "Could not write final document")
@@ -86,7 +88,12 @@ class LatexBuilder:
             transformed_content += transformed_chunk + "\n"
 
         logging.info("Writing main.tex...")
-        with open(os.path.join(self.target_folder, data.get("jtex.output.filename", str, "main.tex")), "w+") as file:
+        with open(
+            os.path.join(
+                self.target_folder, data.get("jtex.output.filename", str, "main.tex")
+            ),
+            "w+",
+        ) as file:
             file.write(stringify_front_matter(data.to_dict()))
             file.write(transformed_content)
 

@@ -4,8 +4,8 @@ import sys
 import typer
 
 from ..version import __version__
-from .render import render
 from .freeform import freeform
+from .render import render
 from .validate import validate
 
 logger = logging.getLogger()

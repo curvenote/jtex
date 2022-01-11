@@ -2,7 +2,6 @@ import glob
 import logging
 import os
 from distutils.dir_util import copy_tree
-from re import template
 from shutil import copyfile
 from typing import Dict, Optional, Tuple
 
