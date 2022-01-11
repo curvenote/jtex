@@ -10,6 +10,7 @@ from jtex.TexFormat import TexFormat
 
 SCHEMA_PATH = pkg_resources.resource_filename("jtex", "schema")
 
+
 class Tag:
     def __init__(self, id: str, plain: bool):
         self.id = id
@@ -20,6 +21,7 @@ class Tag:
 
     def __hash__(self):
         return hash(self.id)
+
 
 class TemplateOptions:
     def __init__(self, template_location: str):

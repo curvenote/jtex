@@ -3,7 +3,7 @@ import subprocess
 import tempfile
 
 
-def test_cli_build_lite():
+def test_cli_freeform():
 
     dir, _ = os.path.split(os.path.realpath(__file__))
 
@@ -11,11 +11,10 @@ def test_cli_build_lite():
         tmp_file = os.path.join(tmp_dir, next(tempfile._get_candidate_names()))
 
         CLI_CMD = (
-            f"jtex build-lite "
-            f"{os.path.join(dir, 'data', 'lite', 'data.yml')} "
+            f"jtex freeform "
             f"{os.path.join(dir, 'data', 'lite', 'template.tex')} "
-            f"{tmp_file} "
-            f"--content {os.path.join(dir, 'data', 'lite', 'main.tex')} "
+            f"{os.path.join(dir, 'data', 'lite', 'main.tex')} "
+            f"--output-tex {tmp_file} "
         )
         ret_val = subprocess.run(CLI_CMD, shell=True)
         assert ret_val.returncode == 0

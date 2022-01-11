@@ -1,0 +1,44 @@
+name: JTEX Front Matter Schema
+desc: "1"
+allowempty: true
+map:
+  title:
+    type: str
+  authors:
+    seq:
+      - map:
+          name:
+            type: str
+          email:
+            type: str
+  jtex:
+    map:
+      version:
+        type: number
+      template:
+        type: str
+      strict:
+        type: bool
+      input:
+        required: true
+        map:
+          references:
+            type: str
+          tagged:
+            allowempty: true
+            type: map
+      output:
+        required: true
+        map:
+          path:
+            type: str
+          filename:
+            type: str
+          copy_images:
+            type: bool
+          single_file:
+            type: bool
+      options:
+        required: true
+        allowempty: true
+        type: map

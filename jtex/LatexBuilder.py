@@ -3,8 +3,8 @@ import os
 import shutil
 from typing import Any, Dict, List, NewType, Optional
 
-from . import DefBuilder, DocModel, TemplateOptions, TemplateRenderer
-from .utils import log_and_raise_errors
+from jtex import DefBuilder, DocModel, TemplateOptions, TemplateRenderer
+from jtex.utils import log_and_raise_errors
 
 logger = logging.getLogger()
 
@@ -27,19 +27,21 @@ class LatexBuilder:
         missing_options = [
             r
             for r in required_options
-            if "options" in data and r not in data["options"]
+            if data.get(f"jtex.options.{r}") is None
         ]
-        logging.warn("Some REQUIRED user options are not provided: %s", missing_options)
-        if len(missing_options) > 0 and raise_if_invalid:
-            raise ValueError(
-                "Some REQUIRED user options are not provided: %s" % missing_options
-            )
+        if len(missing_options) > 0:
+            logging.warn("Some REQUIRED user options are not provided: %s", missing_options)
+            if raise_if_invalid:
+                raise ValueError(
+                    "Some REQUIRED user options are not provided: %s" % missing_options
+                )
 
     def build(
         self,
         data: DocModel,
         content: List[str],
-        bibtex: Optional[str] = None,
+        tagged: Dict[str, str],
+        bibtex: Optional[str] = None, # TODO remove as we copy the file forwards?
         raise_if_invalid: bool = True,
     ):
         logging.info("Rendering template...")
@@ -52,8 +54,14 @@ class LatexBuilder:
                 "TemplateRender is not available, TemplateLoader not initialized"
             )
 
-        data["CONTENT"] = content[0]
-        rendered_content = [self.renderer.render(data)]
+        # prep the data object to the shape expected  by templates
+        doc=data.to_dict()
+        doc.pop('jtex', None)
+        data_to_render = dict(doc=doc)
+        data_to_render['tagged'] = tagged
+        data_to_render['options'] = data.get('jtex.options', Dict[str, Any], {})
+
+        rendered_content = [self.renderer.render(data=data_to_render, content=content[0])]
         self._write(rendered_content, bibtex)
 
     @log_and_raise_errors(lambda *args: "Could not write final document")

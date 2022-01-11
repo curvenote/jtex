@@ -1,0 +1,57 @@
+% ---
+% title: Phase and the Hilbert Transform
+% description: A remix of my 2014 TLE tutorial on computing phase responses and
+%   how to use them
+% short_title: Phase and the Hilbert Transform
+% authors:
+%   - name: Steve Purves
+%     affiliation: curvenote
+%     location: La Orotava, Spain
+%     curvenote: https://curvenote.com/@stevejpurves
+%     is_corresponding: false
+% date:
+%   year: 2020
+%   month: 9
+%   day: 8
+% tags:
+%   - tutorial
+%   - exploration
+%   - seismic-attributes
+%   - phase
+%   - python
+% oxalink: https://curvenote.com/oxa:RkW3EUemHJbWfgejvqYu/BAflQTB9BBGlfSVT40RN.53
+% jtex:
+%   version: 1
+%   template: null
+%   strict: false
+%   input:
+%     references: main.bib
+%     tagged: {}
+%   output:
+%     path: _build
+%     filename: main.tex
+%     copy_images: true
+%     single_file: false
+%   options: {}
+% ---
+
+%% https://curvenote.com/oxa:RkW3EUemHJbWfgejvqYu/j4p2ktrUnpNLTYJxNZAq.5
+
+Phase is a useful underlying property of the analytic trace model of seismic data that can be used as both an interpretation aid and a means to calibrate and check interpretations on a given seismic dataset. We introduce the analytical trace model and demonstrate some of its usages. We provide working code in python for computation of the Hilbert Transform using a robust FFT-based method and explore 2 use cases for such computed quantities. Jupyter notebooks used for computation and generation of the figures are included in this project.
+
+%% https://curvenote.com/oxa:RkW3EUemHJbWfgejvqYu/nxoOOSUIjwn60BZbKluN.15
+
+\subsection*{Introduction}
+
+The concept of phase permeates seismic data processing and signal processing in general, but it can be awkward to understand, and manipulating it directly can lead to surprising results. It doesn't help that the word phase is used to mean a variety of things, depending on whether we refer to the propagating wavelet, the observed wavelet, post-stack seismic attributes, or an entire seismic data set. Several publications have discussed the concepts and ambiguities \citep{Roden1999significance, Liner2002Phase, 2002Tutorial}.
+
+%% https://curvenote.com/oxa:RkW3EUemHJbWfgejvqYu/ihBcaiMuiszbc8xSI8bd.20
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.7\linewidth]{images/RkW3EUemHJbWfgejvqYu-ihBcaiMuiszbc8xSI8bd-v20.png}
+
+  \caption*{
+
+  }
+\end{figure}

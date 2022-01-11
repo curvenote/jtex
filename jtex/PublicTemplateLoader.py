@@ -13,6 +13,7 @@ from .utils import download
 API_URL = "https://api.curvenote.com"
 TEMPLATE_DOWNLOAD_URL = "{api_url}/templates/{template_name}/download"
 
+
 class PublicTemplateLoader(TemplateLoader):
     def __init__(self, template_location: str):
         super().__init__(template_location)
@@ -24,14 +25,22 @@ class PublicTemplateLoader(TemplateLoader):
 
         logging.info("Looking up template %s", template_name)
         try:
-          logging.info(TEMPLATE_DOWNLOAD_URL.format(api_url=API_URL, template_name=template_name))
-          download_info = requests.get(TEMPLATE_DOWNLOAD_URL.format(api_url=API_URL, template_name=template_name)).json()
-          if 'link' not in download_info:
-            typer.echo(f"Template '{template_name}' not found")
-            raise typer.Exit(-1)
+            logging.info(
+                TEMPLATE_DOWNLOAD_URL.format(
+                    api_url=API_URL, template_name=template_name
+                )
+            )
+            download_info = requests.get(
+                TEMPLATE_DOWNLOAD_URL.format(
+                    api_url=API_URL, template_name=template_name
+                )
+            ).json()
+            if "link" not in download_info:
+                typer.echo(f"Template '{template_name}' not found")
+                raise typer.Exit(-1)
         except ValueError as err:
-          logging.error("could not download template %s", template_name)
-          raise ValueError(f"could not download template: {template_name}") from err
+            logging.error("could not download template %s", template_name)
+            raise ValueError(f"could not download template: {template_name}") from err
 
         # fetch template to local folder
         logging.info(f"Found template, download url {download_info['link']}")

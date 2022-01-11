@@ -57,6 +57,7 @@ def test_syntax_inline_comment(renderer):
 
     assert output == "just"
 
+
 def test_syntax_comment(renderer):
     T = r"just %# not this #% this"
 
@@ -101,10 +102,9 @@ def test_rendering(renderer):
         ),
         tagged=dict(abstract="Lorem ispum"),
         curvenote=dict(defs="\\input{curvenote.def}"),
-        CONTENT="Lorem ipsum blahdium...",
     )
 
-    output = renderer.render(data)
+    output = renderer.render(data, content="Lorem ipsum blahdium...")
 
     assert r"\newcommand{\logo}{" in output
     assert r"Curve Note \and Io Oxa" in output

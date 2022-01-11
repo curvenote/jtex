@@ -3,14 +3,15 @@ import subprocess
 import tempfile
 
 
-def test_cli_build():
+def test_cli_render():
     dir, _ = os.path.split(os.path.realpath(__file__))
 
     with tempfile.TemporaryDirectory() as tmp_dir:
+        tmp_dir = "test_tmp"
         CLI_CMD = (
-            f"jtex build "
-            f"{os.path.join(dir, 'data', 'cn')} "
-            f"{tmp_dir} "
+            f"jtex render "
+            f"{os.path.join(dir, 'data', 'cn', 'main.tex')} "
+            f"--output-path {tmp_dir} "
             f"--template-path {os.path.join(dir, 'data', 'cn', 'template')}"
         )
         ret_val = subprocess.run(CLI_CMD, shell=True)
@@ -50,15 +51,15 @@ def test_cli_build():
 
         assert expected == actual
 
-def test_cli_build_from_api():
+
+def test_cli_render_from_api():
     dir, _ = os.path.split(os.path.realpath(__file__))
 
     with tempfile.TemporaryDirectory() as tmp_dir:
         CLI_CMD = (
-            f"jtex build "
-            f"{os.path.join(dir, 'data', 'cn')} "
-            f"{tmp_dir} "
-            "--template-name default"
+            f"jtex render "
+            f"{os.path.join(dir, 'data', 'cn', 'main.tex')} "
+            f"--output-path {tmp_dir} "
         )
         ret_val = subprocess.run(CLI_CMD, shell=True)
         assert ret_val.returncode == 0
