@@ -24,20 +24,20 @@ and confirm correct installation by typing:
 
 As we are dealing with content and data, the cli accepts _paths_ to specific files or folders rather than accepting arguments inline. Here is a minimal example:
 
-Given these 3 files:
-
-```
-# data.yml
-title: Exploring Outer Space
-author:
-  name: Ana Space
-  email: ana@outer.space
-```
+Given these 2 files:
 
 ```
 % content.tex
+% ---
+% title: Exploring Outer Space
+% author:
+%   name: Ana Space
+%   email: ana@outer.space
+% ---
 Outer space is the expanse that exists beyond Earth and between celestial bodies. Outer space is not completely empty—it is a hard vacuum containing a low density of particles, predominantly a plasma of hydrogen and helium, as well as electromagnetic radiation, magnetic fields, neutrinos, dust, and cosmic rays.
 ```
+
+`content.tex` contains a `front matter` section (a header comment block delimited by `% ---`) and the body of content itself. Front matter contains a `yaml` formatted data structure that is made available in the template rendering namespace, such that each top level key is a variable at global scope, as shown in `template.tex` below.
 
 ```
 % template.tex
@@ -65,6 +65,12 @@ To produce a `.tex` file with the following contents:
 
 ```
 % output.tex
+% ---
+% title: Exploring Outer Space
+% author:
+%   name: Ana Space
+%   email: ana@outer.space
+% ---
 \documentclass{article}
 
 \title{Exploring Outer Space}
@@ -86,7 +92,7 @@ Which when compiled produces the following document:
 
 The document layout is flexible and will be based on structure provided in the `template.tex` file, where the modified jinja syntax (`[-`, `-]`) is used to expand variables from the matching DocModel provided in `data.yml`.
 
-`[-CONTENT-]` is a special variable that will expand to the entire contents of `content.tex`
+`[-CONTENT-]` is a special variable that will expand to the entire contents of `content.tex` ()
 
 This example only shows variable expansion (`[-myvar-]`) but the full `jinja2` environment is available with control flow, filters and many python commands.
 
@@ -246,9 +252,9 @@ In addition to the custom syntax we also set the following options:
 
 ### Building a DocModel
 
-We use the term DocModel in our documentation to refer to the dictionary of data passed to a `jinja` template for rendering, loaded from a `data.yml` file. `jinja` docs call this the _Context Dictionary_. It is easy to relate this to the `yml` file that you need to create to use the cli.
+We use the term DocModel to refer to the dictionary of data passed to a `jinja` template for rendering, loaded from `front matter` in the content file. `jinja` docs call this the _Context Dictionary_. It is easy to relate this to the `yaml` that you need to create to use the cli.
 
-The fields at the root level of the file are available as variables in the `jinja` context at global scope.
+The fields at the root level of the strcture are available as variables in the `jinja` context at global scope.
 
 ```
 # data.yml
