@@ -2,6 +2,7 @@ import pytest
 
 from jtex.options.NatbibSchemaOption import citep_transform
 
+
 @pytest.fixture(
     params=[
         ("", ""),

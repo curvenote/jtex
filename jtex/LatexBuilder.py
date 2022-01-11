@@ -3,7 +3,10 @@ import os
 import shutil
 from typing import Any, Dict, List, NewType, Optional
 
-from . import DefBuilder, DocModel, TemplateOptions, TemplateRenderer
+from .DefBuilder import DefBuilder
+from .DocModel import DocModel
+from .TemplateOptions import TemplateOptions
+from .TemplateRenderer import TemplateRenderer
 from .utils import log_and_raise_errors, stringify_front_matter
 
 logger = logging.getLogger()

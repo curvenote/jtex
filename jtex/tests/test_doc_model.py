@@ -5,6 +5,7 @@ from pykwalify.errors import CoreError
 
 from jtex.DocModel import DocModel
 
+
 @pytest.fixture(
     params=[
         {},
