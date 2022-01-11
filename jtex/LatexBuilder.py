@@ -4,7 +4,7 @@ import shutil
 from typing import Any, Dict, List, NewType, Optional
 
 from jtex import DefBuilder, DocModel, TemplateOptions, TemplateRenderer
-from jtex.utils import log_and_raise_errors
+from jtex.utils import log_and_raise_errors, stringify_front_matter
 
 logger = logging.getLogger()
 
@@ -62,10 +62,10 @@ class LatexBuilder:
         data_to_render['options'] = data.get('jtex.options', Dict[str, Any], {})
 
         rendered_content = [self.renderer.render(data=data_to_render, content=content[0])]
-        self._write(rendered_content, bibtex)
+        self._write(data, rendered_content, bibtex)
 
     @log_and_raise_errors(lambda *args: "Could not write final document")
-    def _write(self, content: List[str], bibtex: Optional[str]):
+    def _write(self, data: DocModel, content: List[str], bibtex: Optional[str]):
         logging.info("ProjectBuilder - writing...")
 
         def_builder = DefBuilder()
@@ -86,7 +86,8 @@ class LatexBuilder:
             transformed_content += transformed_chunk + "\n"
 
         logging.info("Writing main.tex...")
-        with open(os.path.join(self.target_folder, "main.tex"), "w+") as file:
+        with open(os.path.join(self.target_folder, data.get("jtex.output.filename", str, "main.tex")), "w+") as file:
+            file.write(stringify_front_matter(data.to_dict()))
             file.write(transformed_content)
 
         logging.info("Writing main.bib...")

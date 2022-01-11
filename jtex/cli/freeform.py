@@ -51,7 +51,7 @@ def freeform(
         resolve_path=True,
     ),
 ):
-    typer.echo(f"Output folder: {output_tex}")
+    typer.echo(f"Output file: {output_tex}")
     typer.echo(f"Content file: {content_tex}")
     typer.echo(f"Template file: {template_tex}")
     if bib:
@@ -73,7 +73,7 @@ def freeform(
         raise typer.Exit(code=1)
 
     # will validate and throw on invalid front matter
-    docmodel = DocModel(fm)
+    docmodel = DocModel(fm, ensure_defaults=False)
 
     template = ""
     try:
@@ -91,7 +91,9 @@ def freeform(
     typer.echo("Rendered")
 
     try:
+        os.makedirs(os.path.dirname(output_tex), exist_ok=True)
         with open(output_tex, "w") as outfile:
+            outfile.write(utils.stringify_front_matter(docmodel.to_dict()))
             outfile.write(rendered)
     except:
         typer.echo("Could not write output file")

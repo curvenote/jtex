@@ -34,8 +34,8 @@ class DocModel:
           rv = rv[key]
       return rv
 
-  def __init__(self, data: Dict):
-    self.model = self.ensure_defaults(data)
+  def __init__(self, data: Dict, ensure_defaults=True):
+    self.model = self.ensure_defaults(data) if ensure_defaults else data
     self._parser = Core(
         source_data=self.model,
         schema_files=[

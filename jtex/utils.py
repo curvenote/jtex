@@ -101,4 +101,4 @@ def stringify_front_matter(data: Dict):
     front_matter_lines.append(f"{FM_DELIM}")
 
     front_matter_section = "\n".join(front_matter_lines)
-    return f"{front_matter_section}"
+    return f"{front_matter_section}\n"
