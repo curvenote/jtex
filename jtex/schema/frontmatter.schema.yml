@@ -6,11 +6,32 @@ map:
     type: str
   authors:
     seq:
-      - map:
+      - type: map
+        allowempty: true
+        mapping:
           name:
             type: str
           email:
             type: str
+          affiliation:
+            type: str
+          curvenote:
+            type: str
+          is_corresponding:
+            type: bool
+  date:
+    map:
+      year:
+        type: number
+      month:
+        type: number
+      day:
+        type: number
+  tags:
+    seq:
+      - type: str
+  oxalink:
+    type: str
   jtex:
     map:
       version:
