@@ -76,7 +76,6 @@ def parse_front_matter(content: str) -> Tuple[Optional[Dict], str]:
         if collect:
             fm_lines.append(line[len(FM_LINE) :])
 
-    print(lines)
     rest = "\n".join(lines[idx:])
 
     return (

@@ -17,8 +17,6 @@ CONFIG_SCHEMA = os.path.join(THE_PATH, "config.schema.yml")
 
 THE_SCHEMAS = [CONFIG_SCHEMA, os.path.join(THE_PATH, "template.schema.yml")]
 
-print(THE_SCHEMAS)
-
 
 def squirt_to_file(tmp_dir: str, contents: str):
     temp_name = next(tempfile._get_candidate_names()) + ".yml"

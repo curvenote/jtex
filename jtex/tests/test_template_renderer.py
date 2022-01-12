@@ -75,7 +75,6 @@ def test_syntax_zip(renderer):
 
 def test_use_filesystem_template():
     with tempfile.TemporaryDirectory() as tmp:
-        print(tmp)
         a = open(path.join(tmp, "a.tex"), "w")
         a.close()
         b = open(path.join(tmp, "b.tex"), "w")
