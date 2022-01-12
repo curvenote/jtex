@@ -77,11 +77,21 @@ def render(
     content_path = os.path.dirname(os.path.abspath(content_file))
     typer.echo(f"Content path {content_path}")
 
-    target_folder = os.path.abspath(docmodel.get("jtex.output.path", str, content_path))
+    # output.path is treated as relative to the content_path, not the current working directory
+    jtex_output_path = os.path.expanduser(docmodel.get("jtex.output.path", str, "."))
+    target_folder = (
+        jtex_output_path
+        if os.path.isabs(jtex_output_path)
+        else os.path.abspath(
+            os.path.join(content_path, docmodel.get("jtex.output.path", str, "."))
+        )
+    )
     if output_path is not None:  # option overrides jtex setting
         target_folder = str(output_path)
         os.makedirs(target_folder, exist_ok=True)
     typer.echo(f"Target output folder {target_folder}")
+
+    jtex_working_path = target_folder
 
     # check for references and confirm bib file
     references = docmodel.get("jtex.input.references")
@@ -114,17 +124,17 @@ def render(
     template = docmodel.get("jtex.template")
     if template_path is not None:
         typer.echo(f"Using local template at: {template_path}")
-        loader = TemplateLoader(str(target_folder))
+        loader = TemplateLoader(jtex_working_path)
         template_options, renderer = loader.initialise_from_path(str(template_path))
     elif template is not None:
         typer.echo(
             f"Using template {docmodel.get('jtex.template')} from the Curvenote API"
         )
-        loader = PublicTemplateLoader(str(target_folder))
+        loader = PublicTemplateLoader(jtex_working_path)
         template_options, renderer = loader.initialise_from_template_api(template)
     else:
         typer.echo("Using built in template")
-        loader = TemplateLoader(str(target_folder))
+        loader = TemplateLoader(jtex_working_path)
         template_options, renderer = loader.initialise_with_builtin_template()
     typer.echo("Template loaded")
 
@@ -138,7 +148,9 @@ def render(
     )
 
     if references is not None:
-        copyfile(bib_file, os.path.join(str(target_folder), "main.bib"))
+        target_bib = os.path.join(str(target_folder), "main.bib")
+        if bib_file != Path(target_bib):
+            copyfile(bib_file, target_bib)
 
     typer.echo("Checking content_path for image assets")
     typer.echo(f"Content Path: {content_path}")
@@ -166,8 +178,9 @@ def render(
                 internal_src_path = Path(src_path).relative_to(content_path)
                 os.makedirs(target_folder / internal_src_path, exist_ok=True)
                 dest = target_folder / internal_src_path / filename
-                copyfile(im_file_path, dest)
-                typer.echo(f"Copied {filename} to {dest}")
+                if Path(im_file_path) != dest:
+                    copyfile(im_file_path, dest)
+                    typer.echo(f"Copied {filename} to {dest}")
         else:
             typer.echo("No image assets found")
 
