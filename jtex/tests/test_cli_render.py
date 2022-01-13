@@ -7,7 +7,6 @@ def test_cli_render():
     dir, _ = os.path.split(os.path.realpath(__file__))
 
     with tempfile.TemporaryDirectory() as tmp_dir:
-
         CLI_CMD = (
             f"jtex render "
             f"{os.path.join(dir, 'data', 'cn', 'main.tex')} "
@@ -28,6 +27,10 @@ def test_cli_render():
             "% authors:\n"
             "% - name: Curve Note\n"
             "% - name: An Other\n"
+            "% date:\n"
+            "%   day: 14\n"
+            "%   month: 1\n"
+            "%   year: 2022\n"
             "% jtex:\n"
             "%   input:\n"
             "%     tagged:\n"
@@ -55,6 +58,8 @@ def test_cli_render():
             "% ---\n"
             "\\title{Test Document}\n"
             "\\author{Curve Note \\and An Other}\n"
+            "\\newdate{articleDate}{14}{1}{2022}\n"
+            "\date{\displaydate{articleDate}}\n"
             "\\begin{document}\n"
             "\\maketitle\n"
             "\\begin{abstract}\n"

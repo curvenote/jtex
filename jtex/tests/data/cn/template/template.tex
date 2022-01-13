@@ -3,6 +3,8 @@
 [-author.name-][# if not loop.last #] \and [# endif #]
 [# endfor #]
 }
+\newdate{articleDate}{[-doc.date.day-]}{[-doc.date.month-]}{[-doc.date.year-]}
+\date{\displaydate{articleDate}}
 \begin{document}
 \maketitle
 [# if tagged and tagged.abstract #]
