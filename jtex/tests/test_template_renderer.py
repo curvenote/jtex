@@ -57,6 +57,7 @@ def test_syntax_inline_comment(renderer):
 
     assert output == "just"
 
+
 def test_syntax_comment(renderer):
     T = r"just %# not this #% this"
 
@@ -74,7 +75,6 @@ def test_syntax_zip(renderer):
 
 def test_use_filesystem_template():
     with tempfile.TemporaryDirectory() as tmp:
-        print(tmp)
         a = open(path.join(tmp, "a.tex"), "w")
         a.close()
         b = open(path.join(tmp, "b.tex"), "w")
@@ -101,10 +101,9 @@ def test_rendering(renderer):
         ),
         tagged=dict(abstract="Lorem ispum"),
         curvenote=dict(defs="\\input{curvenote.def}"),
-        CONTENT="Lorem ipsum blahdium...",
     )
 
-    output = renderer.render(data)
+    output = renderer.render(data, content="Lorem ipsum blahdium...")
 
     assert r"\newcommand{\logo}{" in output
     assert r"Curve Note \and Io Oxa" in output

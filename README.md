@@ -24,20 +24,20 @@ and confirm correct installation by typing:
 
 As we are dealing with content and data, the cli accepts _paths_ to specific files or folders rather than accepting arguments inline. Here is a minimal example:
 
-Given these 3 files:
-
-```
-# data.yml
-title: Exploring Outer Space
-author:
-  name: Ana Space
-  email: ana@outer.space
-```
+Given these 2 files:
 
 ```
 % content.tex
+% ---
+% title: Exploring Outer Space
+% author:
+%   name: Ana Space
+%   email: ana@outer.space
+% ---
 Outer space is the expanse that exists beyond Earth and between celestial bodies. Outer space is not completely empty—it is a hard vacuum containing a low density of particles, predominantly a plasma of hydrogen and helium, as well as electromagnetic radiation, magnetic fields, neutrinos, dust, and cosmic rays.
 ```
+
+`content.tex` contains a `front matter` section (a header comment block delimited by `% ---`) and the body of content itself. Front matter contains a `yaml` formatted data structure that is made available in the template rendering namespace, such that each top level key is a variable at global scope, as shown in `template.tex` below.
 
 ```
 % template.tex
@@ -58,13 +58,19 @@ The End!
 We can render a LaTeX document with the following command:
 
 ```
-  jtex build-lite output.tex data.yml content.tex template.tex
+  jtex freeform output.tex data.yml content.tex template.tex
 ```
 
 To produce a `.tex` file with the following contents:
 
 ```
 % output.tex
+% ---
+% title: Exploring Outer Space
+% author:
+%   name: Ana Space
+%   email: ana@outer.space
+% ---
 \documentclass{article}
 
 \title{Exploring Outer Space}
@@ -86,11 +92,11 @@ Which when compiled produces the following document:
 
 The document layout is flexible and will be based on structure provided in the `template.tex` file, where the modified jinja syntax (`[-`, `-]`) is used to expand variables from the matching DocModel provided in `data.yml`.
 
-`[-CONTENT-]` is a special variable that will expand to the entire contents of `content.tex`
+`[-CONTENT-]` is a special variable that will expand to the entire contents of `content.tex` ()
 
 This example only shows variable expansion (`[-myvar-]`) but the full `jinja2` environment is available with control flow, filters and many python commands.
 
-The `build-lite` command shown above is not opinionated and can be used to render any template with a matching DocModel data structure.
+The `freeform` command shown above is not opinionated and can be used to render any template with a matching DocModel data structure.
 
 ## CLI Overview
 
@@ -106,83 +112,71 @@ Get help from the command line tool at any time using the `--help` option.
 
 The following commands are available on the cli.
 
-#### build-lite
+#### freeform
 
-`build-lite` is an un-opinionated rendering command which as in the example above will allow you to render any template given content and a DocModel.
+`freeform` is an un-opinionated rendering command which as in the example above will allow you to render any template given content and a DocModel.
 
 ```
-jtex build-lite --help
+jtex freeform --help
 
-Usage: jtex build-lite [OPTIONS] DATA_YML TEMPLATE_TEX OUTPUT_TEX
+Usage: jtex freeform [OPTIONS] TEMPLATE_TEX [CONTENT_TEX]
+
+  Build a LaTeX document based on a free-form template, accompanying data
+  structure and optional 'body' content. This can be used for general template
+  rendering independently from Curvenote's prescriptive template structure. To
+  build based on (and to develop/test) Curvenote templates use `build`.
 
 Arguments:
-  DATA_YML       Path to a YAML file containing the DocModel (a free-form
-                 dict) required to render the template.  [required]
   TEMPLATE_TEX   Path to a file with a compatible LaTeX template e.g.
                  mytemplate.tex. The template should align with the data
                  structure given by the DocModel  [required]
-  OUTPUT_TEX     Name of a local file to write the rendered content to. If
-                 OUTPUT exists it will be replaced.  [required]
+  CONTENT_TEX   Path to a file containing the content to render and jtex front
+                matter.  [required]
 
 Options:
-  --content FILE          Path to a file containing the content to render in
-                          the [-CONTENT-] variable  [required]
-  --bib FILE              Path to an optional bib file. This will be copied as-
-                          is into the target folder.
-  --lipsum / --no-lipsum  If specified will patch the document with
-                          '\usepackage{lipsum}'. Useful in testing where
-                          `content.tex` or `temaplte.tex` uses the lipsum
-                          package.  [default: no-lipsum]
-  --help                  Show this message and exit.
+  --output-tex FILE  Optional name of a local file to write the rendered
+                     content to.This will override the data specified in the
+                     front matter in content.
+  --bib FILE         Path to an optional bib file. This will be copied as-is
+                     into the target folder.
+  --help             Show this message and exit.
 ```
 
 The "DocModel" in this case is a bit of an overstatement as it is just a free-form python dictionary defined in the `data.yml` file as shown above.
 
 As you build your template, you can decide on the structure of the data in this file and keep it aligned with the variables you access from within the template. To find out more see [Creating Templates](#creating-templates)
 
-#### build
+#### render
 
-`build` is an opinionated rendering command intended for use with Curvenote content and templates specifically.
+`render` is an opinionated rendering command intended for use with Curvenote content and templates specifically.
 
 ```
-jtex build --help
+jtex render --help
 
-Usage: jtex build [OPTIONS] CONTENT_PATH OUTPUT_PATH
+Usage: jtex render [OPTIONS] CONTENT_FILE
+
+  Build a LaTeX document based on a Curvenote LaTeX Template, accompanying
+  docmodel data structure and content. Can be used to develop/test Curvenote
+  templates.
 
 Arguments:
-  CONTENT_PATH  Path to a folder with containing data and content to render.
-                The folder should contain the following files: data.yml,
-                main.tex, main.bib - along with any additional graphics assets
-                [required]
-  OUTPUT_PATH   Path to a folder in which to construct the Latex assets. If
-                OUTPUT_PATH exists it and all files will be removed and a new
-                empty folder created  [required]
+  CONTENT_FILE  Path to a .tex file with containing jtex front matter content
+                to render.  [required]
 
 Options:
-  --template-path DIRECTORY  Path to a Curvenote compatible LaTeX template
-                             folder. This is intended for use with local
-                             Curvenote templates or in template
-                             development. Omitting this option will use the
-                             built in template.
-  --template-name TEXT       Name of a Curvenote template available from the
-                             public Curvenote API. (e.g. 'default').
-                             Specifying template-path will override this
-                             option if both are provided.
-  --lipsum / --no-lipsum     If lipsum, will patch the document with
-                             '\usepackage{lipsum}'. Useful when testing
-                             templates, where `content.tex` uses the lipsum
-                             package.  [default: no-lipsum]
-  --strict / --no-strict     If strict, then missing required tagged content
-                             or options will halt the process.  [default: no-
-                             strict]
-  --copy / --no-copy         Should image assets will be copied into the
-                             target folder?  [default: copy]
+  --output-path DIRECTORY    If supplied with override the jtex.output.path
+                             (and default path) specified in front matterThis
+                             is useful when dynamically setting a temporary
+                             output folder.Will be created if it does not
+                             exist.
+  --template-path DIRECTORY  If supplied with override the jtex.template
+                             option and use the template found on this path
   --help                     Show this message and exit.
 ```
 
-When exporting LaTeX from Curvenote's API custom environments and commands are included by default. These require certain packages to be loaded and definitions to be included in the final document. `build` will include these definition files and expect certain structure to be present in the `DocModel` when rendering.
+When exporting LaTeX from Curvenote's API custom environments and commands are included by default. These require certain packages to be loaded and definitions to be included in the final document. `render` will include these definition files and expect certain structure to be present in the `DocModel` when rendering.
 
-As `build` is not generally applicable outside of Curvenote templates, we'll not discuss the details further here. For more information check the [Curvenote Open Template Repo](https://github.com/curvenote/templates).
+As `render` is not generally applicable outside of Curvenote templates, we'll not discuss the details further here. For more information check the [Curvenote Open Template Repo](https://github.com/curvenote/templates).
 
 > Note: The Curvenote API can also respond with vanilla LaTeX, but this is not the default case for rendering. For more information on programmatically accessing the Curvenote API, [see the Curvenote python client](https://pypi.org/project/curvenote/).
 
@@ -258,9 +252,9 @@ In addition to the custom syntax we also set the following options:
 
 ### Building a DocModel
 
-We use the term DocModel in our documentation to refer to the dictionary of data passed to a `jinja` template for rendering, loaded from a `data.yml` file. `jinja` docs call this the _Context Dictionary_. It is easy to relate this to the `yml` file that you need to create to use the cli.
+We use the term DocModel to refer to the dictionary of data passed to a `jinja` template for rendering, loaded from `front matter` in the content file. `jinja` docs call this the _Context Dictionary_. It is easy to relate this to the `yaml` that you need to create to use the cli.
 
-The fields at the root level of the file are available as variables in the `jinja` context at global scope.
+The fields at the root level of the strcture are available as variables in the `jinja` context at global scope.
 
 ```
 # data.yml

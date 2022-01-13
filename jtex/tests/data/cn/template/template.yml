@@ -12,10 +12,6 @@ metadata:
   tags:
     - article
     - paper
-  # links:
-  #   github: https://github.com/curvenote/templates/tree/main/latex/curvenote_paper
-  #   source: http://curvenote.com
-# options that can be offered to users to customise how this template is rendered
 config:
   build:
     layout: compact

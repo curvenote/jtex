@@ -38,7 +38,8 @@ setuptools.setup(
         "jinja2",
         "pykwalify",
         "pyyaml",
-        "requests"
+        "requests",
+        "mergedeep"
     ],
     python_requires=">=3.7",
 )

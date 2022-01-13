@@ -4,8 +4,8 @@ import sys
 import typer
 
 from ..version import __version__
-from .build import build
-from .build_lite import build_lite
+from .freeform import freeform
+from .render import render
 from .validate import validate
 
 logger = logging.getLogger()
@@ -27,14 +27,14 @@ app.command(
         "This can be used for general template rendering independently from Curvenote's prescriptive template structure. "
         "To build based on (and to develop/test) Curvenote templates use `build`."
     )
-)(build_lite)
+)(freeform)
 app.command(
     help=(
         "Build a LaTeX document based on a Curvenote LaTeX Template, accompanying docmodel "
         "data structure and content. "
         "Can be used to develop/test Curvenote templates."
     )
-)(build)
+)(render)
 
 
 def version_callback(value: bool):

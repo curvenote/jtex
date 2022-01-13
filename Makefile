@@ -8,11 +8,11 @@ clean:
 	rm -rf dist
 
 lint:
-	pylint jtek
+	pylint jtex
 
 format:
-	isort jtek
-	black jtek
+	isort jtex
+	black jtex
 
 build:
 	python -m build

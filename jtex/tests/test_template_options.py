@@ -1,5 +1,3 @@
-import os
-import re
 import unittest
 
 import pkg_resources
@@ -7,9 +5,7 @@ import pytest
 
 from jtex.TemplateOptions import TemplateOptions
 
-DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename(
-    "jtex", "builtin_template"
-)
+DEFAULT_TEMPLATE_PATH = pkg_resources.resource_filename("jtex", "builtin_template")
 
 
 class TestTemplateOptions(unittest.TestCase):

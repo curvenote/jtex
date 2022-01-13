@@ -62,25 +62,25 @@ class TemplateRenderer:
         """
         self.reset_environment(loader)
 
-    def render_from_string(self, template: str, data: Dict):
+    def render_from_string(self, template: str, data: Dict, content: str = ""):
         """
         Render using the template specified in a string
         """
         if self.jinja is None:
             raise ValueError("Environment not initialized")
         template_obj = self.jinja.from_string(template)
-        return template_obj.render(data)
+        return template_obj.render(**data, CONTENT=content)
 
     def list_templates(self):
         if self.jinja is None:
             raise ValueError("Environment not initialized")
         return [t for t in self.jinja.list_templates() if re.match(r".*.tex$", t)]
 
-    def render(self, data: Dict, template_name: str = "template.tex"):
+    def render(self, data: Dict, content: str, template_name: str = "template.tex"):
         """
         A render method which will
         """
         if self.jinja is None:
             raise ValueError("Environment not initialized")
         template = self.jinja.get_template(template_name)
-        return template.render(**data)
+        return template.render(**data, CONTENT=content)
