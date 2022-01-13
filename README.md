@@ -6,6 +6,8 @@ JTEX is a command line tool (CLI) for rendering LaTeX documents from jinja-style
 
 This allows you to build LaTeX documents driven by content, data and a template. We built this package while developing our template based PDF/LaTeX export system for [Curvenote](https://curvenote.com), where it is used to create documents from the templates on the [Curvenote Community Template Repo](https://github.com/curvenote/templates).
 
+[A CHANGE LOG is available here](CHANGES.md).
+
 ## Installation
 
 Install the package into your virtual environment using pip:
