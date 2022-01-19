@@ -1,2 +1,2 @@
-\newfloat{code}{thp}{loc}[chapter]
+\newfloat{code}{thp}{loc}
 \floatname{code}{Program}
