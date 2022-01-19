@@ -1,1 +1,2 @@
-\newenvironment{code}{\begin{framed}}{\end{framed}}
+\newfloat{code}{thp}{loc}[chapter]
+\floatname{code}{Program}

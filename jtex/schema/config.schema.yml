@@ -5,22 +5,28 @@ schema;config:
       map:
         layout:
           type: str
-          enum: ['compact', 'book']
-        vanilla:
-          type: bool
+          enum: ["compact", "book"]
 
     # fixed per template
     schema:
       map:
         aside:
           type: str
-          enum: ['default', 'marginpar', 'framed', 'mdframed', 'callout', 'aside.def']
+          enum:
+            [
+              "default",
+              "marginpar",
+              "framed",
+              "mdframed",
+              "callout",
+              "aside.def",
+            ]
         callout:
           type: str
-          enum: ['default', 'callout', 'mdframed', 'framed', 'callout.def']
+          enum: ["default", "callout", "mdframed", "framed", "callout.def"]
         code:
           type: str
-          enum: ['default', 'verbatim', 'highlight', 'code.def']
+          enum: ["default", "verbatim", "highlight", "code.def"]
         raggedbottom:
           type: bool
         sloppy:
@@ -83,7 +89,8 @@ schema;config:
             type: # note this is a key name
               type: str
               required: true
-              enum: ['bool', 'str', 'choice', 'corresponding_author', 'keywords']
+              enum:
+                ["bool", "str", "choice", "corresponding_author", "keywords"]
             id:
               type: str
               required: true

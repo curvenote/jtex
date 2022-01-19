@@ -41,17 +41,6 @@ class TemplateOptions:
         )
         self._parser.validate(raise_exception=True)
 
-        # now that schemas are loaded, we can configure additional options
-        self._tex_format: TexFormat = (
-            TexFormat.tex
-            if self.get("config.build.vanilla")
-            else TexFormat.tex_curvenote
-        )
-
-    @property
-    def tex_format(self) -> TexFormat:
-        return self._tex_format
-
     @property
     def template_location(self):
         return self._template_location

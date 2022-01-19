@@ -21,9 +21,11 @@ metadata:
 config:
   build:
     layout: compact
-    vanilla: true
 
   schema:
+    aside: marginpar
+    callout: framed
+    code: verbatim
     raggedbottom: true
     sloppy: true
     hidelinks: true

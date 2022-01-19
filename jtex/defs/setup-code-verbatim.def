@@ -1,1 +1,2 @@
-\DefineVerbatimEnvironment{code}{Verbatim}{fontsize=\small}
+\newfloat{code}{thp}{loc}[chapter]
+\floatname{code}{Program}

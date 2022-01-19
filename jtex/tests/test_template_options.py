@@ -31,7 +31,6 @@ class TestTemplateOptions(unittest.TestCase):
         assert self.default_options.get("random") is None
         assert self.default_options.get("config.build") is not None
         assert self.default_options.get("config.build.layout") == "compact"
-        assert self.default_options.get("config.build.vanilla", False) is True
 
     def test_default_compact(self):
         assert self.default_options.get("config.build.layout") == "compact"

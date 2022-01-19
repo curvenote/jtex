@@ -158,12 +158,11 @@ class TestOptionsSchema(unittest.TestCase):
             config:
                 build:
                     layout: compact
-                    vanilla: true
 
                 schema:
                     aside: marginpar
-                    callout: default
-                    code: highlight
+                    callout: framed
+                    code: verbatim
                     raggedbottom: true
                     sloppy: true
                     hidelinks: true
