@@ -106,7 +106,13 @@ class LatexBuilder:
                 file.write(bibtex)
 
         logging.info("Cleaning up...")
-        files = ["template.tex", "template.yml", "thumbnail.png", "README.md", "PORT.md"]
+        files = [
+            "template.tex",
+            "template.yml",
+            "thumbnail.png",
+            "README.md",
+            "PORT.md",
+        ]
         for file in files:
             if os.path.exists(os.path.join(self.target_folder, file)):
                 os.remove(os.path.join(self.target_folder, file))
