@@ -12,13 +12,15 @@ from .TemplateOptions import TemplateOptions
 from .TemplateRenderer import TemplateRenderer
 from .utils import download
 
-API_URL = "https://api.curvenote.com"
+CURVENOTE_API_URL = os.getenv('CURVENOTE_API_URL')
+API_URL = CURVENOTE_API_URL if CURVENOTE_API_URL is not None else "https://api.curvenote.com"
 TEMPLATE_DOWNLOAD_URL = "{api_url}/templates/tex/{template_name}/download"
 OLD_TEMPLATE_DOWNLOAD_URL = "{api_url}/templates/{template_name}/download"
 
 
 def do_download(URL: str, template_name: str):
     url = URL.format(api_url=API_URL, template_name=template_name)
+    logging.info(f"DOWNLOAD: {url}")
     try:
         download_info = requests.get(url).json()
         if "status" in download_info and download_info["status"] != 200:
@@ -61,7 +63,7 @@ class PublicTemplateLoader(TemplateLoader):
         logging.info(f"Found template, download url {download_info['link']}")
         logging.info("downloading...")
         zip_filename = os.path.join(
-            self._target_folder, f"{template_name}.template.zip"
+            self._target_folder, f"{template_name.replace('/','_')}.template.zip"
         )
         download(download_info["link"], zip_filename)
 

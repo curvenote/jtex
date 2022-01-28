@@ -1,0 +1,81 @@
+% ---
+% authors:
+% - name: Curve Note
+% - name: An Other
+% date:
+%   day: 14
+%   month: 1
+%   year: 2022
+% jtex:
+%   input:
+%     tagged:
+%       abstract: abstract.tex
+%   options:
+%     choose: A
+%     corresponding_author:
+%     - email: joe@bloggs.com
+%       name: Joe Blogs
+%     flag: true
+%     keywords:
+%     - a
+%     - b
+%     - c
+%     text: Some String
+%   output:
+%     copy_images: true
+%     filename: ms.tex
+%     path: .
+%     single_file: false
+%   strict: false
+%   template: public/default
+%   version: 1
+% title: Test Document
+% ---
+\documentclass{article}
+\PassOptionsToPackage{short, nodayofweek}{datetime}
+
+\input{curvenote.def}
+
+% colors for hyperlinks
+\hypersetup{colorlinks=true, allcolors=blue}
+\hypersetup{
+pdftitle={\@title},
+pdfsubject={},
+pdfauthor={\@author},
+pdfkeywords={},
+addtopdfcreator={Written in Curvenote}
+}
+
+\usepackage[oxalink=]{curvenote_default}
+
+\title{Test Document}
+
+\newdate{articleDate}{14}{1}{2022}
+\date{\displaydate{articleDate}}
+
+
+\author{Curve Note\\
+\\
+\and
+An Other\\
+\\
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Abstract: Lorem Abstractium
+\end{abstract}
+
+\keywords{a, b, c}
+
+Lorem ipsum
+
+
+
+\clearpage
+\bibliography{main}
+\end{document}
+
