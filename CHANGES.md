@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.3.7
+
+- Updated to use new templates API curvenote endpoints, with a fallback to previous endpoints just in case
+
 ## v0.3.5 - Breaking Changes
 
 - cli has been restructured to now provide `freeform` and `render` commands in place of `build-lite` and `build`

@@ -18,16 +18,15 @@ OLD_TEMPLATE_DOWNLOAD_URL = "{api_url}/templates/{template_name}/download"
 
 
 def do_download(URL: str, template_name: str):
-    url = URL.format(
-        api_url=API_URL, template_name=template_name
-    )
+    url = URL.format(api_url=API_URL, template_name=template_name)
     try:
         download_info = requests.get(url).json()
         if "status" in download_info and download_info["status"] != 200:
             raise ValueError(f'{template_name} not found - {download_info["status"]}')
     except requests.exceptions.RequestException as e:
-        raise ValueError(f'Requests error - {url} - {e}')
+        raise ValueError(f"Requests error - {url} - {e}")
     return download_info
+
 
 class PublicTemplateLoader(TemplateLoader):
     def __init__(self, template_location: str):
@@ -43,7 +42,11 @@ class PublicTemplateLoader(TemplateLoader):
         try:
             download_info = {}
             try:
-                name = template_name if template_name.startswith('public/') else f"public/{template_name}"
+                name = (
+                    template_name
+                    if template_name.startswith("public/")
+                    else f"public/{template_name}"
+                )
                 download_info = do_download(TEMPLATE_DOWNLOAD_URL, name)
             except:
                 download_info = do_download(OLD_TEMPLATE_DOWNLOAD_URL, template_name)
