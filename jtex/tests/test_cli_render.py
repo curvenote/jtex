@@ -52,7 +52,7 @@ def test_cli_render():
             "%     path: _build\n"
             "%     single_file: false\n"
             "%   strict: false\n"
-            "%   template: default\n"
+            "%   template: public/default\n"
             "%   version: 1\n"
             "% title: Test Document\n"
             "% ---\n"
