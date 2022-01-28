@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.3.8, v0.3.9, v0.3.10
+
+- Addressing issues with Curvenote api access
+- Due to API changes verions prior to v0.3.10 may no longer work
+
 ## v0.3.7
 
 - Updated to use new templates API curvenote endpoints, with a fallback to previous endpoints just in case

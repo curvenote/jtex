@@ -53,7 +53,12 @@ class PublicTemplateLoader(TemplateLoader):
                 )
                 download_info = do_download(TEMPLATE_DOWNLOAD_URL, name)
             except:
-                download_info = do_download(OLD_TEMPLATE_DOWNLOAD_URL, template_name)
+                name = (
+                    template_name
+                    if not template_name.startswith("public/")
+                    else template_name[7:]
+                )
+                download_info = do_download(OLD_TEMPLATE_DOWNLOAD_URL, name)
             if "link" not in download_info:
                 typer.echo(f"Template '{template_name}' not found")
                 raise typer.Exit(-1)
