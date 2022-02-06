@@ -165,7 +165,7 @@ def render(
     if not copy:
         typer.echo("jtex.output.copy_images option is false - not copying image assets")
     else:
-        image_types = ["*.png", "*.jpg", "*.jpeg", "*.eps", "*.gif", "*.bmp", "*.svg"]
+        image_types = ["*.png", "*.jpg", "*.jpeg", "*.eps", "*.gif", "*.bmp", "*.svg", "*.pdf"]
         image_files = []
         for im_type in image_types:
             image_files.extend(
