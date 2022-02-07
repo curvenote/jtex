@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.3.13
+
+- added `has_references` flag to allow omission of boliographies when there are no references in the document
+
 ## v0.3.8, v0.3.9, v0.3.10
 
 - Addressing issues with Curvenote api access
