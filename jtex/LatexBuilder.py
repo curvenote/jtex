@@ -63,6 +63,7 @@ class LatexBuilder:
         data_to_render = dict(doc=doc)
         data_to_render["tagged"] = tagged
         data_to_render["options"] = data.get("jtex.options", Dict[str, Any], {})
+        data_to_render["has_references"] = data.get("jtex.input.references", Dict[str, Any], {})
 
         rendered_content = [
             self.renderer.render(data=data_to_render, content=content[0])

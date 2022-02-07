@@ -6,8 +6,6 @@ from pykwalify.core import Core
 
 from .TemplateOptions import SCHEMA_PATH
 
-# DocModel = NewType("DocModel", Dict[str, Any])
-
 DEFAULTS = dict(
     jtex=dict(
         version=1,
