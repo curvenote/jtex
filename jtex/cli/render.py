@@ -162,6 +162,16 @@ def render(
     except:
         pass
 
+
+    def copy_with_path(file_path: str, target_folder: str):
+        src_path, filename = os.path.split(file_path)
+        internal_src_path = Path(src_path).relative_to(content_path)
+        os.makedirs(target_folder / internal_src_path, exist_ok=True)
+        dest = target_folder / internal_src_path / filename
+        if Path(file_path) != dest:
+            copyfile(file_path, dest)
+            typer.echo(f"Copied {filename} to {dest}")
+
     if not copy:
         typer.echo("jtex.output.copy_images option is false - not copying image assets")
     else:
@@ -181,16 +191,17 @@ def render(
                 glob.glob(f"{content_path}/**/{im_type}", recursive=True)
             )
         if len(image_files) > 0:
-            typer.echo(f"Found {len(image_files)} image assets")
+            typer.echo(f"Found {len(image_files)} files to copy")
             for im_file_path in image_files:
-                src_path, filename = os.path.split(im_file_path)
-                internal_src_path = Path(src_path).relative_to(content_path)
-                os.makedirs(target_folder / internal_src_path, exist_ok=True)
-                dest = target_folder / internal_src_path / filename
-                if Path(im_file_path) != dest:
-                    copyfile(im_file_path, dest)
-                    typer.echo(f"Copied {filename} to {dest}")
+                copy_with_path(im_file_path, target_folder)
         else:
             typer.echo("No image assets found")
+
+
+        tex_files = glob.glob(f"{content_path}/chapters/**/*.tex", recursive=True)
+        if len(tex_files) > 0:
+            typer.echo(f"Found {len(tex_files)} files to copy")
+            for tex_file_path in tex_files:
+                copy_with_path(tex_file_path, target_folder)
 
     typer.echo("Done!")
