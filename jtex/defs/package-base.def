@@ -17,3 +17,4 @@
 \usepackage{xkeyval}
 \usepackage{framed}
 \usepackage{doi}
+\usepackage{longtable}
