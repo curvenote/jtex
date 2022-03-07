@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.3.14
+
+- Changed copying behaviour to include tex files with tagged content and in a `chatpers` folder
+- added longtable as a base package in lieu of improved table support
+
 ## v0.3.13
 
 - added `has_references` flag to allow omission of boliographies when there are no references in the document

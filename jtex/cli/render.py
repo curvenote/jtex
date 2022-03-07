@@ -162,7 +162,6 @@ def render(
     except:
         pass
 
-
     def copy_with_path(file_path: str, target_folder: str):
         src_path, filename = os.path.split(file_path)
         internal_src_path = Path(src_path).relative_to(content_path)
@@ -197,12 +196,13 @@ def render(
         else:
             typer.echo("No image assets found")
 
-
         tex_files = glob.glob(f"{content_path}/**/*.tex", recursive=True)
         if len(tex_files) > 0:
             typer.echo(f"Found {len(tex_files) - 1} files to copy")
             for tex_file_path in tex_files:
-                if tex_file_path.endswith(docmodel.get("jtex.output.filename", str, "main.tex")):
+                if tex_file_path.endswith(
+                    docmodel.get("jtex.output.filename", str, "main.tex")
+                ):
                     continue
                 copy_with_path(tex_file_path, target_folder)
 
