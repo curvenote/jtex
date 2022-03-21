@@ -17,4 +17,6 @@
 \usepackage{xkeyval}
 \usepackage{framed}
 \usepackage{doi}
+\usepackage{pdflscape}
+\usepackage{booktabs}
 \usepackage{longtable}
