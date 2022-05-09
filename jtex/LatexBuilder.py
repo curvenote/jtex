@@ -67,6 +67,10 @@ class LatexBuilder:
             "jtex.input.references", Dict[str, Any], {}
         )
 
+        # handle optional fields
+        if not "authors" in data_to_render or data_to_render["authors"] is None:
+            data_to_render["authors"] = []
+
         rendered_content = [
             self.renderer.render(data=data_to_render, content=content[0])
         ]
