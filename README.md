@@ -60,7 +60,7 @@ The End!
 We can render a LaTeX document with the following command:
 
 ```
-  jtex freeform output.tex data.yml content.tex template.tex
+  jtex freeform template.tex content.tex --output-tex output.tex
 ```
 
 To produce a `.tex` file with the following contents:
