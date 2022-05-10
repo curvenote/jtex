@@ -90,7 +90,7 @@ The End!
 
 Which when compiled produces the following document:
 
-<img src="./example.png" width="600" border="1"/>
+<img src="https://github.com/curvenote/jtex/blob/main/example.png?raw=true" width="600" border="1"/>
 
 The document layout is flexible and will be based on structure provided in the `template.tex` file, where the modified jinja syntax (`[-`, `-]`) is used to expand variables from the matching DocModel provided in `data.yml`.
 
